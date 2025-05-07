@@ -1,4 +1,3 @@
-import Link from "next/link";
 import ProductCard from "./ProductCard";
 
 export default function BestSellers() {
