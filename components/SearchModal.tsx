@@ -10,12 +10,14 @@ interface SearchModalProps {
 const DARTWOOD = [
   "Mercusys AC12 Cable Router Dual Band with Switch 3x 10/100",
   "Compact PoE Switches 10/100 or 10/100/1000",
+  "IEC PDUs with C12 & C19 Mixed Sockets",
   "Router Setup Guide",
+  "1U 19 & quot; Horizontally Rack Mounted",
   "Mixed Horizontal PDU 4 x C13 + 5 x C19",
   "Cabling Services",
   "Router Troubleshooting",
   "Network Cabling Tools",
-  "WiFi Router Tips",
+  "Steel Chasis Construction",
   "Fiber Optic Installation",
 ];
 
