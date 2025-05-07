@@ -49,7 +49,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex items-center">
-            <Image src="/images/phone.png" alt="twitter" width={30} height={25} className="mr-2" />
+            <Image src="/images/phone.png" alt="twitter" width={30} height={25} className="mr-2" /> 
             <div className="flex flex-col mt-2">
               <p>
                 Phone
