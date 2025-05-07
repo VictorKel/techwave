@@ -40,6 +40,9 @@ export default function Nav() {
           <div className="flex items-center gap-6 text-sm">
             <div className="flex items-center gap-1 cursor-pointer">
               <span>Services</span>
+            </div>
+            <div className="flex items-center gap-1 cursor-pointer">
+              <span>Category</span>
               <ChevronDown className="w-4 h-4" />
             </div>
             <div className="flex items-center gap-1 cursor-pointer">
