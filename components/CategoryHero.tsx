@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import SearchModal from "@/components/SearchModal";
 
 export default function Hero() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false); 
 
     return (
       <section className="bg-contain h-[85vh] bg-no-repeat bg-center " style={{ backgroundImage: 'url(/category-image.png)' }}>

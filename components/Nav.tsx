@@ -1,23 +1,44 @@
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
-import React, { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import SearchModal from "@/components/SearchModal";
+import CartModal from "@/components/CartModal";
 
 export default function Nav() {
   const [navBg, setNavBg] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
+  const categoryRef = useRef<HTMLDivElement>(null);
+  const helpRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const handler = () => {
+    const handleScroll = () => {
       setNavBg(window.scrollY >= 90);
     };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        categoryRef.current &&
+        !categoryRef.current.contains(event.target as Node)
+      ) {
+        setShowCategories(false);
+      }
+      if (helpRef.current && !helpRef.current.contains(event.target as Node)) {
+        setShowHelp(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const categoryItems = [
@@ -70,24 +91,38 @@ export default function Nav() {
             </div>
 
             {/* Category Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setShowCategories(true)}
-              onMouseLeave={() => setShowCategories(false)}
-            >
-              <div className="flex items-center gap-1 cursor-pointer">
+            <div className="relative" ref={categoryRef}>
+              <div
+                className="flex items-center gap-1 cursor-pointer"
+                onClick={() => {
+                  setShowCategories(!showCategories);
+                  setShowHelp(false);
+                }}
+              >
                 <span>Category</span>
-                <ChevronDown className="w-4 h-4" />
+                {showCategories ? (
+                  <ChevronUp className="w-4 h-4" />
+                ) : (
+                  <ChevronDown className="w-4 h-4" />
+                )}
               </div>
               {showCategories && (
-                <div className="absolute top-full left-0 mt-2 w-[400px] bg-white text-black shadow-lg rounded-md grid grid-cols-2 gap-2 p-4 z-50">
+                <div
+                  className={`absolute top-full right-0 mt-4 w-[450px] bg-white text-black shadow-lg rounded-md grid grid-cols-2 gap-1 p-4 z-50
+                  transition-all duration-300 transform ${
+                    showCategories
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                >
                   {categoryItems.map((item, index) => (
                     <Link
                       key={index}
-                      href={`/category/${item
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
-                      className="hover:bg-gray-100 px-2 py-1 rounded text-sm block"
+                      href={`/category/${encodeURIComponent(
+                        item.toLowerCase().replace(/\s+/g, "-")
+                      )}`}
+                      className="hover:bg-gray-100 px-2 py-1 rounded text-sm block transition-colors duration-200 hover:text-[#7D0101]"
+                      onClick={() => setShowCategories(false)}
                     >
                       {item}
                     </Link>
@@ -97,22 +132,38 @@ export default function Nav() {
             </div>
 
             {/* Help Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setShowHelp(true)}
-              onMouseLeave={() => setShowHelp(false)}
-            >
-              <div className="flex items-center gap-1 cursor-pointer">
+            <div className="relative" ref={helpRef}>
+              <div
+                className="flex items-center gap-1 cursor-pointer"
+                onClick={() => {
+                  setShowHelp(!showHelp);
+                  setShowCategories(false);
+                }}
+              >
                 <span>Help</span>
-                <ChevronDown className="w-4 h-4" />
+                {showHelp ? (
+                  <ChevronUp className="w-4 h-4" />
+                ) : (
+                  <ChevronDown className="w-4 h-4" />
+                )}
               </div>
               {showHelp && (
-                <div className="absolute top-full left-0 mt-2 w-[300px] bg-white text-black shadow-lg rounded-md grid grid-cols-2 gap-2 p-4 z-50">
+                <div
+                  className={`absolute top-full left-0 mt-4 w-[350px] bg-white text-black shadow-lg rounded-md grid grid-cols-2 gap-1 p-4 z-50
+                  transition-all duration-300 transform ${
+                    showHelp
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                >
                   {helpItems.map((item, index) => (
                     <Link
                       key={index}
-                      href={`/help/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                      href={`/help/${encodeURIComponent(
+                        item.toLowerCase().replace(/\s+/g, "-")
+                      )}`}
                       className="hover:bg-gray-100 px-2 py-1 rounded text-sm block"
+                      onClick={() => setShowHelp(false)}
                     >
                       {item}
                     </Link>
@@ -121,7 +172,10 @@ export default function Nav() {
               )}
             </div>
 
-            <div className="flex items-center gap-1 cursor-pointer">
+            <div
+              className="flex items-center gap-1 cursor-pointer"
+              onClick={() => setIsCartOpen(true)}
+            >
               <FaShoppingCart />
               <span>Cart (0)</span>
             </div>
@@ -135,6 +189,7 @@ export default function Nav() {
       </div>
 
       <SearchModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
-};
+}

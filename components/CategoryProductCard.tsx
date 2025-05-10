@@ -22,15 +22,17 @@ export default function ProductCard({
   const altText = typeof title === "string" ? title : "Product Image";
 
   return (
-    <div className="p-4 rounded shadow transition-transform hover:scale-[1.02] duration-200">
-      {/* <img src={image} alt={title} className="w-full h-60 object-cover" /> */}
-      <Image
-        src={image}
-        alt={altText}
-        fill
-        className="object-contain"
-        sizes="(max-width: 768px) 100vw, 33vw"
-      />
+    <div className="bg-white transition-transform hover:scale-[1.02] duration-200 space-y-4">
+      <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-white">
+        <Image
+          src={image}
+          alt={altText}
+          fill
+          className="object-contain"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+      </div>
+
       <div className="px-4 pt-3 pb-4">
         <div className="flex items-center justify-between text-sm font-medium text-black mb-6">
           <h3 className="leading-tight">{title}</h3>
