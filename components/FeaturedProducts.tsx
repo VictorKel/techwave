@@ -26,7 +26,7 @@ export default function FeaturedProducts() {
       image: "/images/cam2.png",
       title: (
         <>
-          Discover Hikvision's Latest <br /> ColorVu Technology
+          Discover Hikvision`&apos;s Latest <br /> ColorVu Technology
         </>
       ),
       price: 500000,
