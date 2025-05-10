@@ -64,9 +64,7 @@ export default function Nav() {
       <SearchModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
-};
-
-
+}
 
 // import { FaSearch, FaShoppingCart } from "react-icons/fa";
 // import React, { useEffect, useState } from "react";
@@ -109,7 +107,6 @@ export default function Nav() {
 //           </div>
 //         </div>
 
-        
 //         <div className="flex items-center gap-6 text-sm">
 //           <div className="flex items-center gap-1 cursor-pointer">
 //             <span>Services</span>
@@ -117,7 +114,7 @@ export default function Nav() {
 //               <ChevronDown className="w-4 h-4" />
 //             </span>
 //           </div>
-          
+
 //           <div className="flex items-center gap-1 cursor-pointer">
 //             <span>Help</span>
 //             <span>
