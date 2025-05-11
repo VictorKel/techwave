@@ -1,99 +1,351 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { useRouter } from "next/router";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import CardPaymentModal from "@/components/CardPaymentModal";
+
+interface FormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address1: string;
+  address2: string;
+  region: string;
+  city: string;
+  delivery: string;
+  payment: string;
+}
 
 const CheckoutPage = () => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  const router = useRouter();
+  const [selectedDelivery, setSelectedDelivery] = useState("");
+  const [selectedPayment, setSelectedPayment] = useState("");
+  const [showCardModal, setShowCardModal] = useState(false);
+
+  const onSubmit = (data: FormValues) => {
+    console.log("Submitted Data:", data);
+    if (data.payment === "Pay with Monieswitch") {
+      setShowCardModal(true);
+    } else {
+      alert("Proceeding with: " + data.payment);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#FAFAFA] px-4 md:px-12 py-25">
       <h1 className="text-2xl font-semibold mb-6 text-black">Checkout</h1>
-
-      <div className="flex flex-col lg:flex-row gap-8">
+      {/* ✅ MODAL */}
+      {showCardModal && (
+        <CardPaymentModal onClose={() => setShowCardModal(false)} />
+      )}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col lg:flex-row gap-8"
+      >
         {/* Left Side */}
         <div className="flex-1 flex flex-col gap-8">
           {/* Customer Address */}
           <div className="bg-white rounded-md p-6 shadow-sm">
-            <h2 className="text-sm font-semibold mb-4">CUSTOMER ADDRESS</h2>
+            <div className="border-b border-[#EEEEEE] text-gray-300 mb-6">
+              <h2 className="text-sm font-semibold mb-2">CUSTOMER ADDRESS</h2>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input placeholder="Enter your first name" className="input" />
-              <input placeholder="Enter your last name" className="input" />
-              <input placeholder="Enter your email address" className="input" />
-              <input placeholder="Enter your phone number" className="input" />
-              <input placeholder="Enter your home address" className="input col-span-2" />
-              <input placeholder="Enter your address" className="input col-span-2" />
-              <select className="input">
-                <option>Select your region</option>
-              </select>
-              <select className="input">
-                <option>Select your city</option>
-              </select>
+              <div>
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                  placeholder="Enter your first name"
+                  className="outline-none border border-[#EEEEEE] text-gray-300 mt-2"
+                  {...register("firstName", {
+                    required: "First name is required",
+                  })}
+                />
+                {errors.firstName && (
+                  <p className="text-sm text-red-500">
+                    {errors.firstName.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  placeholder="Enter your last name"
+                  className="outline-none border border-[#EEEEEE] text-gray-300 mt-2"
+                  {...register("lastName", {
+                    required: "Last name is required",
+                  })}
+                />
+                {errors.lastName && (
+                  <p className="text-sm text-red-500">
+                    {errors.lastName.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  placeholder="Enter your email address"
+                  className="outline-none border border-[#EEEEEE] text-gray-300 mt-2"
+                  {...register("email", { required: "Email is required" })}
+                />
+                {errors.email && (
+                  <p className="text-sm text-red-500">{errors.email.message}</p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  placeholder="Enter your phone number"
+                  className="outline-none border border-[#EEEEEE] text-gray-300 mt-2"
+                  {...register("phone", {
+                    required: "Phone number is required",
+                  })}
+                />
+                {errors.phone && (
+                  <p className="text-sm text-red-500">{errors.phone.message}</p>
+                )}
+              </div>
+              <div className="col-span-2">
+                <Label htmlFor="address1">Address Line 1</Label>
+                <Input
+                  placeholder="Enter your home address"
+                  className="outline-none border border-[#EEEEEE] text-gray-300 mt-2"
+                  {...register("address1", { required: "Address is required" })}
+                />
+                {errors.address1 && (
+                  <p className="text-sm text-red-500">
+                    {errors.address1.message}
+                  </p>
+                )}
+              </div>
+              <div className="col-span-2">
+                <Label htmlFor="address2">Address Line 2</Label>
+                <Input
+                  placeholder="Enter your address"
+                  className="outline-none border border-[#EEEEEE] text-gray-300 mt-2"
+                  {...register("address2")}
+                />
+              </div>
+              <div>
+                <Label htmlFor="region" className="mb-2">Region</Label>
+                <Controller
+                  name="region"
+                  control={control}
+                  rules={{ required: "Region is required" }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your region"/>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="north">North</SelectItem>
+                        <SelectItem value="south">South</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {errors.region && (
+                  <p className="text-sm text-red-500">
+                    {errors.region.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="city" className="mb-2">City</Label>
+                <Controller
+                  name="city"
+                  control={control}
+                  rules={{ required: "City is required" }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your city" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="lagos">Lagos</SelectItem>
+                        <SelectItem value="abuja">Abuja</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {errors.city && (
+                  <p className="text-sm text-red-500">{errors.city.message}</p>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Delivery Method */}
           <div className="bg-white rounded-md p-6 shadow-sm">
-            <h2 className="text-sm font-semibold mb-4">DELIVERY METHOD</h2>
-            <div className="space-y-4">
-              <label className="flex items-center justify-between border px-4 py-2 rounded cursor-pointer">
-                <span className="flex items-center gap-2">
-                  <span>🏪</span> Store
-                </span>
-                <input type="radio" name="delivery" />
-              </label>
-              <label className="flex items-center justify-between border px-4 py-2 rounded cursor-pointer">
-                <span className="flex items-center gap-2">
-                  <span>🏠</span> Home Delivery
-                </span>
-                <input type="radio" name="delivery" />
-              </label>
+            <div className="border-b border-[#EEEEEE] mb-6">
+              <h2 className="text-sm font-semibold mb-2">DELIVERY METHOD</h2>
             </div>
+            <Controller
+              name="delivery"
+              control={control}
+              rules={{ required: "Delivery method is required" }}
+              render={({ field }) => (
+                <RadioGroup
+                  onValueChange={(val) => {
+                    field.onChange(val);
+                    setSelectedDelivery(val);
+                  }}
+                  value={field.value}
+                >
+                  <div className="space-y-4">
+                    {[
+                      { label: "🏪 Store", value: "store" },
+                      { label: "🏠 Home Delivery", value: "home" },
+                    ].map(({ label, value }) => (
+                      <Label
+                        key={value}
+                        className={`flex items-center justify-between px-4 py-2 rounded cursor-pointer border ${
+                          selectedDelivery === value
+                            ? "bg-[#F3F3F3] border-[#7D0101]"
+                            : "border-[#EEEEEE]"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">{label}</span>
+                        <RadioGroupItem value={value} />
+                      </Label>
+                    ))}
+                  </div>
+                </RadioGroup>
+              )}
+            />
+            {errors.delivery && (
+              <p className="text-sm text-red-500">{errors.delivery.message}</p>
+            )}
           </div>
 
           {/* Payment Method */}
           <div className="bg-white rounded-md p-6 shadow-sm">
-            <h2 className="text-sm font-semibold mb-4">PAYMENT METHOD</h2>
-            <div className="space-y-4">
-              {["Pay on Delivery", "Pay with Monieswitch", "Pay with Paystack", "Pay Bank transfer"].map((method, i) => (
-                <label key={i} className="flex items-center justify-between border px-4 py-2 rounded cursor-pointer">
-                  <span>{method}</span>
-                  <input type="radio" name="payment" />
-                </label>
-              ))}
+            <div className="border-b border-[#EEEEEE] mb-6">
+              <h2 className="text-sm font-semibold mb-2">PAYMENT METHOD</h2>
             </div>
+            <Controller
+              name="payment"
+              control={control}
+              rules={{ required: "Payment method is required" }}
+              render={({ field }) => (
+                <RadioGroup
+                  onValueChange={(val) => {
+                    field.onChange(val);
+                    setSelectedPayment(val);
+                  }}
+                  value={field.value}
+                >
+                  <div className="space-y-4">
+                    {[
+                      "Pay on Delivery",
+                      "Pay with Monieswitch",
+                      "Pay with Paystack",
+                      "Pay Bank transfer",
+                    ].map((method) => (
+                      <Label
+                        key={method}
+                        className={`flex items-center justify-between px-4 py-2 rounded cursor-pointer border ${
+                          selectedPayment === method
+                            ? "bg-[#F3F3F3] border-[#7D0101]"
+                            : "border-[#EEEEEE]"
+                        }`}
+                      >
+                        <span>{method}</span>
+                        <RadioGroupItem value={method} />
+                      </Label>
+                    ))}
+                  </div>
+                </RadioGroup>
+              )}
+            />
+            {errors.payment && (
+              <p className="text-sm text-red-500">{errors.payment.message}</p>
+            )}
           </div>
         </div>
 
         {/* Right Side - Order Summary */}
-        <div className="w-full lg:w-[350px]">
+        <div className="w-full lg:w-[400px]">
           <div className="bg-white rounded-md p-6 shadow-sm">
-            <h2 className="text-sm font-semibold mb-4">Order Summary</h2>
-            <div className="flex items-center gap-4 mb-4">
-              <img src="/images/pdu1.png" alt="Product" className="w-16 h-16 object-cover rounded" />
-              <div>
-                <p className="text-sm font-medium">Get proof of delivery with Hikvision</p>
-                <p className="text-xs text-gray-500">Qty 1</p>
-              </div>
-              <span className="ml-auto text-sm font-medium">₦500,000.00</span>
+            <div className="border-b border-[#EEEEEE] mb-6">
+              <h2 className="text-sm font-semibold mb-2">Order Summary</h2>
             </div>
-
-            <div className="text-sm space-y-2 mb-4">
-              <div className="flex justify-between"><span>Subtotal</span><span>₦500,000.00</span></div>
-              <div className="flex justify-between"><span>Shipping fees</span><span>₦5,000.00</span></div>
-              <div className="flex justify-between font-semibold"><span>Total</span><span>₦505,000.00</span></div>
+            <div className="border-b border-[#EEEEEE] mb-6">
+              <div className="flex items-center gap-4 mb-4">
+                <img
+                  src="/images/pdu1.png"
+                  alt="Product"
+                  className="w-16 h-16 object-cover rounded"
+                />
+                <div>
+                  <p className="text-sm font-medium">
+                    Get proof of delivery with Hikvision
+                  </p>
+                  <p className="text-xs text-gray-500">Qty 1</p>
+                </div>
+                <span className="ml-auto text-sm font-medium">₦500,000.00</span>
+              </div>
+            </div>
+            <div className="border-b border-[#EEEEEE]">
+              <div className="text-sm space-y-2">
+                <div className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span>₦500,000.00</span>
+                </div>
+                <div className="flex justify-between mb-4">
+                  <span>Shipping fees</span>
+                  <span>₦5,000.00</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between font-semibold mt-4 mb-4">
+              <span>Total</span>
+              <span>₦505,000.00</span>
             </div>
 
             {/* Promo Code */}
             <div className="bg-[#FAFAFA] p-4 rounded mb-4">
-              <label className="text-sm mb-2 block">Promo Code</label>
-              <div className="flex gap-2">
-                <input placeholder="Enter promo code" className="input flex-1" />
-                <button className="bg-[#7D0101] text-white px-4 text-sm rounded">Apply Code</button>
+              <h2>Promo Code</h2>
+              <div className="p-4">
+                <Label htmlFor="promo">Promo Code</Label>
+                <div className="flex gap-2">
+                  <Input
+                    placeholder="Enter promo code"
+                    id="promo"
+                    className="outline-none border border-[#EEEEEE] mt-2"
+                  />
+                  <button className="bg-[#7D0101] text-white  text-xs w-full py-2 rounded-md">
+                    Apply Code
+                  </button>
+                </div>
               </div>
             </div>
 
-            <button className="w-full bg-[#7D0101] text-white py-3 rounded text-sm">
+            <button
+              type="submit"
+              className="w-full bg-[#7D0101] text-white py-2 rounded-md text-sm"
+            >
               Proceed to payment
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
