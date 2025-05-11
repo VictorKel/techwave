@@ -12,8 +12,8 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleCheckout = () => {
-    router.push("/checkout"); // <-- navigate to checkout
-    onClose(); // Optionally close modal
+    router.push("/checkout"); 
+    onClose();
   };
 
   return (
