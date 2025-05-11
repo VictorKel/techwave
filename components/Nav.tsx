@@ -2,7 +2,7 @@ import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/link"
 import SearchModal from "@/components/SearchModal";
 import CartModal from "@/components/CartModal";
 
@@ -192,4 +192,4 @@ export default function Nav() {
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
-}
+};

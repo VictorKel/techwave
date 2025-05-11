@@ -1,42 +1,41 @@
 import ProductCard from "./ProductCard";
 
-
 export default function FeaturedProducts() {
-    const products = [
-        {
-          image: "/images/cam1.png",
-          title: (
-            <>
-              Get proof of delivery with <br /> Hikvision
-            </>
-          ),
-          price: 500000,
-          vatPrice: 600000,
-        },
-        {
-          image: "/images/fuse.png",
-          title: (
-            <>
-              Compact PoE Switches 10/100 or <br /> 10/100/1000
-            </>
-          ),
-          price: 5000000,
-          vatPrice: 6000000,
-        },
-        {
-          image: "/images/cam2.png",
-          title: (
-            <>
-              Discover Hikvision's Latest <br /> ColorVu Technology
-            </>
-          ),
-          price: 500000,
-          vatPrice: 600000,
-        },
-    ];
+  const products = [
+    {
+      image: "/images/cam1.png",
+      title: (
+        <>
+          Get proof of delivery with <br /> Hikvision
+        </>
+      ),
+      price: 500000,
+      vatPrice: 600000,
+    },
+    {
+      image: "/images/fuse.png",
+      title: (
+        <>
+          Compact PoE Switches 10/100 or <br /> 10/100/1000
+        </>
+      ),
+      price: 5000000,
+      vatPrice: 6000000,
+    },
+    {
+      image: "/images/cam2.png",
+      title: (
+        <>
+          Discover Hikvision`&apos;s Latest <br /> ColorVu Technology
+        </>
+      ),
+      price: 500000,
+      vatPrice: 600000,
+    },
+  ];
 
-    return (
-      <section className="p-6 w-[90%] md:w-[90%] mx-auto">
+  return (
+    <section className="p-6 w-[90%] md:w-[90%] mx-auto">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold">Featured Products</h2>
         <button className="text-sm text-[#006699] hover:underline flex items-center gap-1">
@@ -64,5 +63,5 @@ export default function FeaturedProducts() {
         ))}
       </div>
     </section>
-    );
-};
+  );
+}

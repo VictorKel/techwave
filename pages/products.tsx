@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import FeaturedProducts from "./components/FeaturedProducts";
+import FeaturedProducts from "../components/FeaturedProducts";
 
 export default function ProductInfo() {
   return (
@@ -12,7 +12,7 @@ export default function ProductInfo() {
         <Specification />
         <FeaturedProducts />
         <Newsletter />
-        <div className=" my-[60px] bg-red-100 flex items-center justify-start">
+        {/* <div className=" my-[60px] bg-red-100 flex items-center justify-start">
           <p className="text-[18px]">Left</p>
           <Image
             src="/images/cable-one.png"
@@ -29,7 +29,7 @@ export default function ProductInfo() {
             height={0}
             className="h-[30px]"
           />
-        </div>
+        </div> */}
       </div>
     </React.Fragment>
   );
@@ -37,7 +37,7 @@ export default function ProductInfo() {
 
 const Navigation = () => {
   return (
-    <div className="flex flex-wrap gap-2 items-center mt-[40px] mb-[60px]">
+    <div className="flex flex-wrap gap-2 items-center mb-[60px] pt-[120px]">
       <Link href="Home" className="text-[14px] text-[#272727B2]">
         Home
       </Link>
@@ -61,7 +61,7 @@ const ProductImages = () => {
           height={0}
           width={650}
           className=" h-[500px]"
-          src="/images/cable-one.png"
+          src="/images/prod-details-first-image.webp"
           alt="product image"
         />
       </div>
@@ -78,7 +78,7 @@ const ProductImages = () => {
 const MainImageView = () => {
   return (
     <Image
-      src="/images/cable-one.png"
+      src="/images/prod-details-first-image.webp"
       alt=""
       height={0}
       width={70}
@@ -89,7 +89,7 @@ const MainImageView = () => {
 const SecondImageView = () => {
   return (
     <Image
-      src="/images/view-two.png"
+      src="/images/prod-details-alt-2.webp"
       alt=""
       height={0}
       width={70}
@@ -100,7 +100,7 @@ const SecondImageView = () => {
 const ThirdImageView = () => {
   return (
     <Image
-      src="/images/view-three.png"
+      src="/images/prod-details-alt-3.webp"
       alt=""
       height={0}
       width={70}
@@ -112,7 +112,7 @@ const ThirdImageView = () => {
 //THESE GO TO THE RIGHT
 const ProductDescription = () => {
   return (
-    <div className="flex w-[100%] justify-between">
+    <div className="flex w-[100%] mt-[0px] justify-between">
       <div className="w-[60%]">
         <ProductImages />
       </div>
@@ -330,11 +330,11 @@ const Specification = () => {
 
 const Newsletter = () => {
   return (
-    <div className="flex flex-col space-y-2 items-center mt-[60px] ">
+    <div className="flex flex-col space-y-2 items-center my-[60px] ">
       <p className="text-[#fff] flex w-[110px] h-[35px] bg-[#7D0101] font-thin justify-center items-center rounded-full">
         Newsletter
       </p>
-      <p className="text-[52px] font-[550] tracking-tighter w-[600px] leading-[65px] text-center text-[#111]">
+      <p className="text-[52px] mt-[20px] font-[600] tracking-tighter w-[600px] leading-[56px] text-center text-[#111]">
         Stay Updated on Latest Product Releases{" "}
       </p>
       <p className="text-[16px] w-[300px] text-center mt-[10px] font-InstrumentSans">
