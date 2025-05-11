@@ -50,8 +50,16 @@ const CheckoutPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] px-4 md:px-12 py-25">
-      <h1 className="text-2xl font-semibold mb-6 text-black">Checkout</h1>
-      {/* ✅ MODAL */}
+      <div className="flex items-center mb-6">
+        <img
+          src="/images/arrowback.png"
+          alt="Back"
+          className="w-3 h-5 object-cover rounded mr-3 cursor-pointer"
+          onClick={() => router.push("/")}
+        />
+        <h1 className="text-2xl font-semibold text-black">Checkout</h1>
+      </div>
+
       {showCardModal && (
         <CardPaymentModal onClose={() => setShowCardModal(false)} />
       )}
@@ -77,7 +85,7 @@ const CheckoutPage = () => {
                   })}
                 />
                 {errors.firstName && (
-                  <p className="text-sm text-red-500">
+                  <p className="text-sm text-[#7D0101]">
                     {errors.firstName.message}
                   </p>
                 )}
@@ -92,7 +100,7 @@ const CheckoutPage = () => {
                   })}
                 />
                 {errors.lastName && (
-                  <p className="text-sm text-red-500">
+                  <p className="text-sm text-[#7D0101]">
                     {errors.lastName.message}
                   </p>
                 )}
@@ -105,7 +113,7 @@ const CheckoutPage = () => {
                   {...register("email", { required: "Email is required" })}
                 />
                 {errors.email && (
-                  <p className="text-sm text-red-500">{errors.email.message}</p>
+                  <p className="text-sm text-[#7D0101]">{errors.email.message}</p>
                 )}
               </div>
               <div>
@@ -118,24 +126,24 @@ const CheckoutPage = () => {
                   })}
                 />
                 {errors.phone && (
-                  <p className="text-sm text-red-500">{errors.phone.message}</p>
+                  <p className="text-sm text-[#7D0101]">{errors.phone.message}</p>
                 )}
               </div>
               <div className="col-span-2">
-                <Label htmlFor="address1">Address Line 1</Label>
+                <Label htmlFor="address1">Home Address</Label>
                 <Input
                   placeholder="Enter your home address"
                   className="outline-none border border-[#EEEEEE] text-gray-300 mt-2"
                   {...register("address1", { required: "Address is required" })}
                 />
                 {errors.address1 && (
-                  <p className="text-sm text-red-500">
+                  <p className="text-sm text-[#7D0101]">
                     {errors.address1.message}
                   </p>
                 )}
               </div>
               <div className="col-span-2">
-                <Label htmlFor="address2">Address Line 2</Label>
+                <Label htmlFor="address2">Additional Address</Label>
                 <Input
                   placeholder="Enter your address"
                   className="outline-none border border-[#EEEEEE] text-gray-300 mt-2"
@@ -143,49 +151,65 @@ const CheckoutPage = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="region" className="mb-2">Region</Label>
+                <Label htmlFor="region" className="mb-2">
+                  Region
+                </Label>
                 <Controller
                   name="region"
                   control={control}
                   rules={{ required: "Region is required" }}
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your region"/>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select your region" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="north">North</SelectItem>
-                        <SelectItem value="south">South</SelectItem>
+                      <SelectContent className="bg-[#F0F4F8] text-black">
+                        <SelectItem value="north" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">North</SelectItem>
+                        <SelectItem value="south" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">South</SelectItem>
+                        <SelectItem value="east" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">East</SelectItem>
+                        <SelectItem value="west" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">West</SelectItem>
+                        <SelectItem value="central" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Central</SelectItem>
                       </SelectContent>
                     </Select>
                   )}
                 />
                 {errors.region && (
-                  <p className="text-sm text-red-500">
+                  <p className="text-sm text-[#7D0101]">
                     {errors.region.message}
                   </p>
                 )}
               </div>
               <div>
-                <Label htmlFor="city" className="mb-2">City</Label>
+                <Label htmlFor="city" className="mb-2">
+                  City
+                </Label>
                 <Controller
                   name="city"
                   control={control}
                   rules={{ required: "City is required" }}
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select your city" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="lagos">Lagos</SelectItem>
-                        <SelectItem value="abuja">Abuja</SelectItem>
+                      <SelectContent className="bg-[#F0F4F8] text-black">
+                        <SelectItem value="lagos" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Lagos</SelectItem>
+                        <SelectItem value="abuja" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Abuja</SelectItem>
+                        <SelectItem value="port-harcourt" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">
+                          Port Harcourt
+                        </SelectItem>
+                        <SelectItem value="kano" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Kano</SelectItem>
+                        <SelectItem value="ibadan" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Ibadan</SelectItem>
+                        <SelectItem value="enugu" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Enugu</SelectItem>
+                        <SelectItem value="benin-city" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Benin City</SelectItem>
+                        <SelectItem value="jos" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Jos</SelectItem>
+                        <SelectItem value="kaduna" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Kaduna</SelectItem>
                       </SelectContent>
                     </Select>
                   )}
                 />
                 {errors.city && (
-                  <p className="text-sm text-red-500">{errors.city.message}</p>
+                  <p className="text-sm text-[#7D0101]">{errors.city.message}</p>
                 )}
               </div>
             </div>
@@ -217,11 +241,11 @@ const CheckoutPage = () => {
                         key={value}
                         className={`flex items-center justify-between px-4 py-2 rounded cursor-pointer border ${
                           selectedDelivery === value
-                            ? "bg-[#F3F3F3] border-[#7D0101]"
-                            : "border-[#EEEEEE]"
+                            ? "bg-[#FFF7F7] border-[#CCCCCC] text-[#272727]"
+                            : "border border-[#EEEEEE]"
                         }`}
                       >
-                        <span className="flex items-center gap-2">{label}</span>
+                        <span className="flex items-center gap-2 ">{label}</span>
                         <RadioGroupItem value={value} />
                       </Label>
                     ))}
@@ -262,7 +286,7 @@ const CheckoutPage = () => {
                         key={method}
                         className={`flex items-center justify-between px-4 py-2 rounded cursor-pointer border ${
                           selectedPayment === method
-                            ? "bg-[#F3F3F3] border-[#7D0101]"
+                            ? "bg-[#FFF7F7] border-[#CCCCCC]"
                             : "border-[#EEEEEE]"
                         }`}
                       >
@@ -281,7 +305,7 @@ const CheckoutPage = () => {
         </div>
 
         {/* Right Side - Order Summary */}
-        <div className="w-full lg:w-[400px]">
+        <div className="w-full lg:w-[350px]">
           <div className="bg-white rounded-md p-6 shadow-sm">
             <div className="border-b border-[#EEEEEE] mb-6">
               <h2 className="text-sm font-semibold mb-2">Order Summary</h2>
