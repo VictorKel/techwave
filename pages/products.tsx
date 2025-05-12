@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import FeaturedProducts from "../components/FeaturedProducts";
+import RelatedProducts from "@/components/RelatedProducts";
+// import FeaturedProducts from "../components/FeaturedProducts";
 
 export default function ProductInfo() {
   return (
@@ -10,7 +11,7 @@ export default function ProductInfo() {
         <Navigation />
         <ProductDescription />
         <Specification />
-        <FeaturedProducts />
+        <RelatedProducts />
         <Newsletter />
         {/* <div className=" my-[60px] bg-red-100 flex items-center justify-start">
           <p className="text-[18px]">Left</p>
@@ -258,7 +259,7 @@ const Cart = () => {
 //OUT OF THE PRODUCT DESCRIPTION VIEW
 const Specification = () => {
   return (
-    <>
+    <div className="mb-[100px]">
       <p className=" mt-[60px] mb-[20px] text-[13px] tracking-wide flex justify-center items-center h-[35px] w-[120px] rounded border bg-[#7D0101] text-[#fff] ">
         Specification
       </p>
@@ -271,7 +272,7 @@ const Specification = () => {
             height={12}
             className=""
           />
-          <p className="text-[12px] font-[500]">Steel Chasis Construction</p>
+          <p className="text-[13px] font-[500]">Steel Chasis Construction</p>
         </div>
         <div className=" flex flex-wrap gap-3">
           <Image
@@ -281,7 +282,9 @@ const Specification = () => {
             height={12}
             className=""
           />
-          <p className="text-[12px] font-[500]">Black RAL 905 </p>
+          <p className="text-[13px] font-[500]">
+            Black RAL 9005 Fine Texture Powder Coat Finish{" "}
+          </p>
         </div>
         <div className=" flex flex-wrap gap-3">
           <Image
@@ -291,7 +294,9 @@ const Specification = () => {
             height={12}
             className=""
           />
-          <p className="text-[12px] font-[500]">Steel Chasis Construction</p>
+          <p className="text-[13px] font-[500]">
+            M5 External Earth Stud c/w Anti Shake Washer & Nut
+          </p>
         </div>
         <div className=" flex flex-wrap gap-3">
           <Image
@@ -301,7 +306,10 @@ const Specification = () => {
             height={12}
             className=""
           />
-          <p className="text-[12px] font-[500]">Steel Chasis Construction</p>
+          <p className="text-[13px] font-[500]">
+            Red Illuminated 16A Double Pole Switch c/w Switch Cover (Where
+            Applicable)
+          </p>
         </div>
         <div className=" flex flex-wrap gap-3">
           <Image
@@ -311,7 +319,9 @@ const Specification = () => {
             height={12}
             className=""
           />
-          <p className="text-[12px] font-[500]">Steel Chasis Construction</p>
+          <p className="text-[13px] font-[500]">
+            Operating Voltage 250V 50Hz AC max
+          </p>
         </div>
         <div className=" flex flex-wrap gap-3">
           <Image
@@ -321,16 +331,62 @@ const Specification = () => {
             height={12}
             className=""
           />
-          <p className="text-[12px] font-[500]">Steel Chasis Construction</p>
+          <p className="text-[13px] font-[500]">EN IEC 62368 1:2020+A11:2020</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
+// const RelatedProducts = () => {
+//   return (
+//     <div className="my-[40px]">
+//       <div className="flex justify-between mb-[20px]">
+//         <p className="text-[18px] font-[500]">Related Products</p>
+//         <div className="flex gap-[10px] items-center">
+//           <p className="text-[14px] text-[#7D0101]">See all</p>
+//           <Image
+//             src="/svg/arrow-see-more.svg"
+//             alt="see more"
+//             height={0}
+//             width={5}
+//           />
+//         </div>
+//       </div>
+//       <div className="  inline-flex flex-col space-y-[15px]">
+//         <Image
+//           src="/images/r-one.png"
+//           alt="Product image"
+//           height={0}
+//           width={310}
+//           className="rounded-[20]"
+//         />
+//         <div className=" flex justify-between">
+//           <p className="text-[13px] w-[180px] font-[500]">
+//             Great proof of delivery with Hikvision
+//           </p>
+//           <p className="text-[14px] font-[500] ">₦500,000.00</p>
+//         </div>
+//         <div className="flex justify-between">
+//           <div className="flex gap-3">
+//             <p className="text-[13px]">Color</p>
+//             <Image
+//               src="/svg/arrow-down.svg"
+//               alt="see more"
+//               height={0}
+//               width={13}
+//             />
+//           </div>
+//           <p className="text-[#7D0101] text-[13px]">VAT:₦5,000.00</p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
 const Newsletter = () => {
   return (
-    <div className="flex flex-col space-y-2 items-center my-[60px] ">
+    <div className="flex flex-col space-y-2 items-center mt-[120px] mb-[80px] ">
       <p className="text-[#fff] flex w-[110px] h-[35px] bg-[#7D0101] font-thin justify-center items-center rounded-full">
         Newsletter
       </p>
