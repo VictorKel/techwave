@@ -75,7 +75,7 @@ export default function Nav() {
         }`}
       >
         <div className="text-white flex items-center h-full justify-between w-[90%] xl:w-[87%] mx-auto ">
-          <Image src="/images/Logo.png" alt="Logo" width={150} height={30} />
+          <Image src="/images/Logo.png" alt="Logo" width={150} height={30} onClick={() => router.push("/")}/>
 
           <div className="flex-1 mx-8">
             <div
