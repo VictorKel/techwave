@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import RelatedProducts from "@/components/RelatedProducts";
+import { useRouter } from "next/router";
 // import FeaturedProducts from "../components/FeaturedProducts";
 
 export default function ProductInfo() {
@@ -244,14 +245,19 @@ const Counter = () => {
 };
 
 const Cart = () => {
+  const router = useRouter();
+
   return (
     <>
       <div className="flex justify-center items-center h-[45px] w-[full] rounded-lg mb-[5px] border border-[#7D010140] bg-[] text-[#272727] ">
         <p className="text-[13px]">Add to cart</p>
       </div>
-      <div className="flex justify-center items-center h-[45px] w-[full] rounded-lg  border bg-[#7D0101] text-[#fff] ">
+      <button 
+       className="flex justify-center items-center h-[45px] w-[full] rounded-lg  border bg-[#7D0101] text-[#fff] "
+       onClick={() => router.push("/checkout")}
+      >
         <p className="text-[13px]">Buy now</p>
-      </div>
+      </button>
     </>
   );
 };
