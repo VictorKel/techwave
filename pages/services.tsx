@@ -86,7 +86,7 @@ export default function Services() {
             />
           </div>
         </div>
-        <div className="flex justify-between mt-[10px] mb-[60px]">
+        <div className="flex justify-between mt-[10px] mb-4">
           <div className="inline-flex py-[15px] px-[10px] flex-col  bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
             <Image
               src="/svg/data-recovery.svg"
