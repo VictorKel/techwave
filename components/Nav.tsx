@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link"
 import SearchModal from "@/components/SearchModal";
 import CartModal from "@/components/CartModal";
+import { useRouter } from "next/router";
 
 export default function Nav() {
   const [navBg, setNavBg] = useState(false);
@@ -12,6 +13,7 @@ export default function Nav() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+  const router = useRouter();
 
   const categoryRef = useRef<HTMLDivElement>(null);
   const helpRef = useRef<HTMLDivElement>(null);
@@ -86,8 +88,8 @@ export default function Nav() {
           </div>
 
           <div className="flex items-center gap-6 text-sm">
-            <div className="flex items-center gap-1 cursor-pointer">
-              <span>Services</span>
+            <div className="flex items-center gap-1 cursor-pointer" onClick={() => router.push("/services")}>
+              <span>Services</span> 
             </div>
 
             {/* Category Dropdown */}

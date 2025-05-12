@@ -245,12 +245,12 @@ const Counter = () => {
 const Cart = () => {
   return (
     <>
-      <div className="flex justify-center items-center h-[45px] w-[full] rounded-lg mb-[5px] border border-[#7D010140] bg-[] text-[#272727] ">
+      <button className="flex justify-center items-center h-[45px] w-[full] rounded-lg mb-[5px] border border-[#7D010140] bg-[] text-[#272727] ">
         <p className="text-[13px]">Add to cart</p>
-      </div>
-      <div className="flex justify-center items-center h-[45px] w-[full] rounded-lg  border bg-[#7D0101] text-[#fff] ">
+      </button>
+      <button className="flex justify-center items-center h-[45px] w-[full] rounded-lg  border bg-[#7D0101] text-[#fff] ">
         <p className="text-[13px]">Buy now</p>
-      </div>
+      </button>
     </>
   );
 };

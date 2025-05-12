@@ -305,7 +305,7 @@ const CheckoutPage = () => {
         </div>
 
         {/* Right Side - Order Summary */}
-        <div className="w-full lg:w-[350px]">
+        <div className="w-full lg:w-[400px]">
           <div className="bg-white rounded-md p-6 shadow-sm">
             <div className="border-b border-[#EEEEEE] mb-6">
               <h2 className="text-sm font-semibold mb-2">Order Summary</h2>

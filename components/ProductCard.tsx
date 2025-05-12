@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
+import { useRouter } from "next/router";
 
 type ProductCardProps = {
   image: string;
@@ -16,9 +17,11 @@ export default function ProductCard({ image, title, price, vatPrice }: ProductCa
 
   const altText = typeof title === 'string' ? title : 'Product Image';
 
+  const router = useRouter();
+
   return (
     <div className="bg-white transition-transform hover:scale-[1.02] duration-200 space-y-4">
-      <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-white">
+      <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-white" onClick={() => router.push("/products")}>
         <Image
           src={image}
           alt={altText}

@@ -26,8 +26,8 @@ export default function Services() {
         </div>
       </section>
       <section>
-        <div className="flex flex-col flex-wrap gap-4 my-[60px] justify-center items-center">
-          <p className=" text-[42px] font-[480] tracking-tighter leading-[55px] text-center w-[350px]">
+        <div className="flex flex-col flex-wrap gap-4 my-[45px] justify-center items-center">
+          <p className=" text-[42px] font-[480] text-[#272727] tracking-tighter leading-[55px] text-center w-[350px]">
             Your End-To-End Cabling Partner
           </p>
           <p className="text-center w-[450px] text-[14px] text-[#8C8C8C] ">
@@ -36,93 +36,96 @@ export default function Services() {
           </p>
         </div>
       </section>
-      <section className="mx-[60px]">
-        <div className="flex justify-between">
-          <div className="inline-flex py-[15px] px-[10px] flex-col gap-[15px] bg-[#CCCCCCCC] border border-[#FAFAFA] rounded-md">
+      <section className="p-6 w-[90%] md:w-[90%] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="inline-flex p-4 flex-col  bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
+            <div className="p-4">
+              <Image
+                src="/svg/installations.svg"
+                alt=""
+                width={25}
+                height={0}
+                className="flex justify-center items-center w-[50px] h-[50px] p-2 rounded-xl bg-[#7D0101] mb-2"
+              />
+              <p className="text-[22px] font-[500] mb-2">Installations</p>
+              <p className="text-[13px] text-[#8C8C8C] w-[450px]">
+                Professional setup and implementation of cabling systems. Our
+                certified technicians ensure a smooth and efficient installation
+                process.
+              </p>
+            </div>
             <Image
-              src="/svg/installations.svg"
-              alt=""
-              width={25}
-              height={0}
-              className="flex justify-center items-center w-[50px] h-[50px] rounded bg-[#7D0101]"
-            />
-            <p className="text-[22px] font-[500]">Installations</p>
-            <p className="text-[13px] text-[#8C8C8C] w-[450px]">
-              Professional setup and implementation of cabling systems. Our
-              certified technicians ensure a smooth and efficient installation
-              process.
-            </p>
-            <Image
-              src="/images/r-one.png"
+              src="/images/installation-image.png"
               alt="installation"
               width={545}
               height={0}
-              className="h-[250px]"
+              className="h-[200px] rounded-xl"
             />
           </div>
-          <div className="inline-flex py-[15px] px-[10px] flex-col gap-[15px] bg-[#CCCCCCCC] border border-[#FAFAFA] rounded-md">
+          <div className="inline-flex p-4 flex-col  bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
+            <div className="p-4">
+              <Image
+                src="/svg/consultancy.svg"
+                alt=""
+                width={25}
+                height={0}
+                className="flex justify-center items-center w-[50px] h-[50px] p-2 rounded-xl bg-[#7D0101] mb-2"
+              />
+              <p className="text-[22px] font-[500] mb-2">Consultancy</p>
+              <p className="text-[13px] text-[#8C8C8C] w-[450px]">
+                Expert advice and planning for your cabling infrastructure needs.  
+                Let us help you design a solution that meets your specific requirements.
+              </p>
+            </div>
             <Image
-              src="/svg/installations.svg"
-              alt=""
-              width={25}
-              height={0}
-              className="flex justify-center items-center w-[50px] h-[50px] rounded bg-[#7D0101]"
-            />
-            <p className="text-[22px] font-[500]">Installations</p>
-            <p className="text-[13px] text-[#8C8C8C] w-[450px]">
-              Professional setup and implementation of cabling systems. Our
-              certified technicians ensure a smooth and efficient installation
-              process.
-            </p>
-            <Image
-              src="/images/r-one.png"
+              src="/images/Consultancy.png"
               alt="installation"
               width={545}
               height={0}
-              className="h-[250px]"
+              className="h-[200px] rounded-xl"
             />
           </div>
         </div>
-        <div className="flex justify-between mt-[10px] mb-[60px]">
-          <div className="inline-flex py-[15px] px-[10px] flex-col gap-[15px] bg-[#CCCCCCCC] border border-[#FAFAFA] rounded-md">
+        <div className="flex justify-between mt-[10px] mb-4">
+          <div className="inline-flex py-[15px] px-[10px] flex-col  bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
             <Image
-              src="/svg/installations.svg"
+              src="/svg/data-recovery.svg"
               alt=""
               width={25}
               height={0}
-              className="flex justify-center items-center w-[50px] h-[50px] rounded bg-[#7D0101]"
+              className="flex justify-center items-center w-[50px] h-[50px] p-2 rounded-xl bg-[#7D0101] mb-2"
             />
-            <p className="text-[22px] font-[500]">Installations</p>
+            <p className="text-[22px] font-[500] mb-2">Data Recovery</p>
             <p className="text-[13px] text-[#8C8C8C] w-[355px]">
               Professional setup and implementation of cabling systems. Our
               certified technicians ensure a smooth and efficient installation
               process.
             </p>
           </div>
-          <div className="inline-flex py-[15px] px-[10px] flex-col gap-[15px] bg-[#CCCCCCCC] border border-[#FAFAFA] rounded-md">
+          <div className="inline-flex py-[15px] px-[10px] flex-col bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
             <Image
-              src="/svg/installations.svg"
+              src="/svg/office-solution.svg"
               alt=""
               width={25}
               height={0}
-              className="flex justify-center items-center w-[50px] h-[50px] rounded bg-[#7D0101]"
+              className="flex justify-center items-center w-[50px] h-[50px] p-2 mb-2 rounded-xl bg-[#7D0101]"
             />
-            <p className="text-[22px] font-[500]">Installations</p>
+            <p className="text-[22px] font-[500] mb-2">Office Solution</p>
             <p className="text-[13px] text-[#8C8C8C] w-[355px]">
               Professional setup and implementation of cabling systems. Our
               certified technicians ensure a smooth and efficient installation
               process.
             </p>
           </div>
-          <div className="inline-flex py-[15px] px-[10px] flex-col gap-[15px] bg-[#CCCCCCCC] border border-[#FAFAFA] rounded-md">
+          <div className="inline-flex p-4 flex-col bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
             <Image
-              src="/svg/installations.svg"
+              src="/svg/training.svg"
               alt=""
               width={25}
               height={0}
-              className="flex justify-center items-center w-[50px] h-[50px] rounded bg-[#7D0101]"
+              className="flex justify-center items-center w-[50px] h-[50px] p-2 rounded-xl bg-[#7D0101] mb-2"
             />
-            <p className="text-[22px] font-[500]">Installations</p>
+            <p className="text-[22px] font-[500] mb-2">Training</p>
             <p className="text-[13px] text-[#8C8C8C] w-[355px]">
               Professional setup and implementation of cabling systems. Our
               certified technicians ensure a smooth and efficient installation
