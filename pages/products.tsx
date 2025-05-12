@@ -2,8 +2,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import RelatedProducts from "@/components/RelatedProducts";
-import { useRouter } from "next/router";
+import { useState } from "react";
+// import { set } from "react-hook-form";
 // import FeaturedProducts from "../components/FeaturedProducts";
+
+// const [activeSelectedImageView, setActiveSelectedImageView] = useState("");
 
 export default function ProductInfo() {
   return (
@@ -56,58 +59,41 @@ const Navigation = () => {
 };
 
 const ProductImages = () => {
+  const images = [
+    "/images/prod-details-alt-1.webp",
+    "/images/prod-details-alt-2.webp",
+    "/images/prod-details-alt-3.webp",
+  ];
+
+  const [selectedImage, setSelectedImage] = useState(images[0]);
+
   return (
-    <div className="flex flex-wrap gap-3 bg-[#EBEBEB] justify-center py-[20px] rounded-md">
+    <div className="flex flex-wrap gap-3 bg-[#EBEBEB] justify-start p-[20px] rounded-md">
       <div>
         <Image
           height={0}
           width={650}
-          className=" h-[500px]"
-          src="/images/prod-details-first-image.webp"
+          className="h-[500px]"
+          src={selectedImage}
           alt="product image"
         />
       </div>
-      <div className="flex gap-2 mt-[12px] ">
-        <MainImageView />
-        <SecondImageView />
-        <ThirdImageView />
+      <div className="flex gap-2 mt-[12px] items-start">
+        {images.map((img, idx) => (
+          <Image
+            key={idx}
+            src={img}
+            alt="product image"
+            height={0}
+            width={70}
+            className={`h-[45px] rounded cursor-pointer hover:border-[4px] hover:border-[#7d010130] ${
+              selectedImage === img ? "border-[4px] border-[#7d01015d]" : ""
+            }`}
+            onClick={() => setSelectedImage(img)}
+          />
+        ))}
       </div>
     </div>
-  );
-};
-
-//THESE ARE THE AVAILABLE IMAGE VIEWS ON THE LEFT SIDE ->
-const MainImageView = () => {
-  return (
-    <Image
-      src="/images/prod-details-first-image.webp"
-      alt=""
-      height={0}
-      width={70}
-      className="h-[45px] rounded"
-    />
-  );
-};
-const SecondImageView = () => {
-  return (
-    <Image
-      src="/images/prod-details-alt-2.webp"
-      alt=""
-      height={0}
-      width={70}
-      className="h-[45px] rounded"
-    />
-  );
-};
-const ThirdImageView = () => {
-  return (
-    <Image
-      src="/images/prod-details-alt-3.webp"
-      alt=""
-      height={0}
-      width={70}
-      className="h-[45px] rounded"
-    />
   );
 };
 
@@ -233,29 +219,36 @@ const Price = () => {
   return <p className="text-[26px] font-bold my-[20px]">₦500,000.00</p>;
 };
 const Counter = () => {
+  const [count, setCount] = useState(1);
+  const increment = () => setCount((prev) => prev + 1);
+  const decrement = () => {
+    if (count > 1) {
+      setCount((prev) => prev - 1);
+    }
+  };
+
   return (
     <div className="block mb-[30px]">
       <div className=" bg-[#F1F1F1]  rounded-lg flex justify-between w-[35%] h-[35px] items-center px-[15px]">
-        <p className="font-medium">-</p>
-        <p className="font-medium">1</p>
-        <p className="font-medium">+</p>
+        <p className="font-medium cursor-pointer" onClick={decrement}>
+          -
+        </p>
+        <p className="font-medium">{count}</p>
+        <p className="font-medium cursor-pointer" onClick={increment}>
+          +
+        </p>
       </div>
     </div>
   );
 };
 
 const Cart = () => {
-  const router = useRouter();
-
   return (
     <>
-      <div className="flex justify-center items-center h-[45px] w-[full] rounded-lg mb-[5px] border border-[#7D010140] bg-[] text-[#272727] ">
+      <button className="flex justify-center items-center h-[45px] w-[full] rounded-lg mb-[5px] border border-[#7D010140] bg-[] text-[#272727] ">
         <p className="text-[13px]">Add to cart</p>
-      </div>
-      <button 
-       className="flex justify-center items-center h-[45px] w-[full] rounded-lg  border bg-[#7D0101] text-[#fff] "
-       onClick={() => router.push("/checkout")}
-      >
+      </button>
+      <button className="flex justify-center items-center h-[45px] w-[full] rounded-lg  border bg-[#7D0101] text-[#fff] ">
         <p className="text-[13px]">Buy now</p>
       </button>
     </>
