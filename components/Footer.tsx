@@ -37,29 +37,30 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="font-semibold">Contact Us</h4>
+
           <div className="flex mb-2 items-center">
-            <Image src="/images/mail.png" alt="twitter" width={30} height={25} className="mr-2.5"/>
+            <Image src="/images/mail.png" alt="email" width={30} height={25} className="mr-2.5" />
             <div className="flex flex-col">
-              <p>
-                Email
-              </p>
-              <p>
+              <p>Email</p>
+              <a
+                href="mailto:Sales@dartwood.com"
+                className=" hover:underline"
+              >
                 Sales@dartwood.com
-              </p>
+              </a>
             </div>
           </div>
-          <div className="flex items-center">
-            <Image src="/images/phone.png" alt="twitter" width={30} height={25} className="mr-2" /> 
-            <div className="flex flex-col mt-2">
-              <p>
-                Phone
-              </p>
-              <p>
+
+          <div className="flex items-start mt-4">
+            <Image src="/images/phone.png" alt="phone" width={30} height={25} className="mr-2" />
+            <div className="flex flex-col">
+              <p>Phone</p>
+              <a href="tel:+2348023220143" className=" hover:underline">
                 +2348023220143
-              </p>
-              <p>
+              </a>
+              <a href="tel:+2347032355959" className=" hover:underline">
                 +2347032355959
-              </p>
+              </a>
             </div>
           </div>
         </div>
