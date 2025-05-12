@@ -1,21 +1,69 @@
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
-import React, { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link"
 import SearchModal from "@/components/SearchModal";
+import CartModal from "@/components/CartModal";
 
 export default function Nav() {
   const [navBg, setNavBg] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
+
+  const categoryRef = useRef<HTMLDivElement>(null);
+  const helpRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handler = () => {
+    const handleScroll = () => {
       setNavBg(window.scrollY >= 90);
     };
-
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        categoryRef.current &&
+        !categoryRef.current.contains(event.target as Node)
+      ) {
+        setShowCategories(false);
+      }
+      if (helpRef.current && !helpRef.current.contains(event.target as Node)) {
+        setShowHelp(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const categoryItems = [
+    "Tracking Devices",
+    "IT Solutions Products",
+    "Radiation Detection Equipment",
+    "Software",
+    "Access Control Systems",
+    "Security Systems",
+    "Computer & Servers",
+    "CCTV & Surveillance Systems",
+    "Telephone Systems",
+    "Anti Terrorist Equipment",
+    "Accessories & Consumables",
+    "Network Solution",
+  ];
+
+  const helpItems = [
+    "Address Books",
+    "Order History",
+    "Wishlist",
+    "Recurring Payments",
+    "Returns & Refunds",
+    "Track an order",
+  ];
 
   return (
     <>
@@ -41,18 +89,97 @@ export default function Nav() {
             <div className="flex items-center gap-1 cursor-pointer">
               <span>Services</span>
             </div>
-            <div className="flex items-center gap-1 cursor-pointer">
-              <span>Category</span>
-              <ChevronDown className="w-4 h-4" />
+
+            {/* Category Dropdown */}
+            <div className="relative" ref={categoryRef}>
+              <div
+                className="flex items-center gap-1 cursor-pointer"
+                onClick={() => {
+                  setShowCategories(!showCategories);
+                  setShowHelp(false);
+                }}
+              >
+                <span>Category</span>
+                {showCategories ? (
+                  <ChevronUp className="w-4 h-4" />
+                ) : (
+                  <ChevronDown className="w-4 h-4" />
+                )}
+              </div>
+              {showCategories && (
+                <div
+                  className={`absolute top-full right-0 mt-4 w-[450px] bg-white text-black shadow-lg rounded-md grid grid-cols-2 gap-1 p-4 z-50
+                  transition-all duration-300 transform ${
+                    showCategories
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                >
+                  {categoryItems.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={`/category/${encodeURIComponent(
+                        item.toLowerCase().replace(/\s+/g, "-")
+                      )}`}
+                      className="hover:bg-gray-100 px-2 py-1 rounded text-sm block transition-colors duration-200 hover:text-[#7D0101]"
+                      onClick={() => setShowCategories(false)}
+                    >
+                      {item}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="flex items-center gap-1 cursor-pointer">
-              <span>Help</span>
-              <ChevronDown className="w-4 h-4" />
+
+            {/* Help Dropdown */}
+            <div className="relative" ref={helpRef}>
+              <div
+                className="flex items-center gap-1 cursor-pointer"
+                onClick={() => {
+                  setShowHelp(!showHelp);
+                  setShowCategories(false);
+                }}
+              >
+                <span>Help</span>
+                {showHelp ? (
+                  <ChevronUp className="w-4 h-4" />
+                ) : (
+                  <ChevronDown className="w-4 h-4" />
+                )}
+              </div>
+              {showHelp && (
+                <div
+                  className={`absolute top-full left-0 mt-4 w-[350px] bg-white text-black shadow-lg rounded-md grid grid-cols-2 gap-1 p-4 z-50
+                  transition-all duration-300 transform ${
+                    showHelp
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                >
+                  {helpItems.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={`/help/${encodeURIComponent(
+                        item.toLowerCase().replace(/\s+/g, "-")
+                      )}`}
+                      className="hover:bg-gray-100 px-2 py-1 rounded text-sm block"
+                      onClick={() => setShowHelp(false)}
+                    >
+                      {item}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="flex items-center gap-1 cursor-pointer">
+
+            <div
+              className="flex items-center gap-1 cursor-pointer"
+              onClick={() => setIsCartOpen(true)}
+            >
               <FaShoppingCart />
               <span>Cart (0)</span>
             </div>
+
             <span className="cursor-pointer text-gray-300">Login</span>
             <button className="bg-[#7D0101] hover:bg-orange-700 text-white px-4 py-1.5 cursor-pointer rounded-md">
               Sign up
@@ -62,75 +189,7 @@ export default function Nav() {
       </div>
 
       <SearchModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
-}
-
-// import { FaSearch, FaShoppingCart } from "react-icons/fa";
-// import React, { useEffect, useState } from "react";
-// import { ChevronDown } from "lucide-react";
-// import Image from "next/image";
-
-// export default function Nav() {
-//   const [navBg, setNavBg] = useState(false);
-
-//   useEffect(() => {
-//     const handler = () => {
-//       if (window.scrollY >= 90) setNavBg(true);
-//       if (window.scrollY < 90) setNavBg(false);
-//     };
-
-//     window.addEventListener("scroll", handler);
-
-//     return () => {
-//       window.removeEventListener("scroll", handler);
-//     };
-//   }, []);
-
-//   return (
-//     <div
-//       className={`fixed w-full transition-all duration-200 h-20 z-[1000] ${
-//         navBg ? "shadow-md backdrop-blur-md bg-black/70" : "bg-[#111111]"
-//       }`}
-//     >
-//       <div className="text-white flex items-center h-full justify-between w-[90%] xl:w-[87%] mx-auto ">
-//         <Image src="/images/Logo.png" alt="Logo" width={150} height={30} />
-
-//         <div className="flex-1 mx-8">
-//           <div className="flex items-center bg-[#262626] rounded-full px-4 py-2 max-w-xl w-80 mx-auto">
-//             <FaSearch className="text-gray-400 mr-2" />
-//             <input
-//               type="text"
-//               placeholder="Search cabling, Router"
-//               className="bg-transparent outline-none text-white w-full"
-//             />
-//           </div>
-//         </div>
-
-//         <div className="flex items-center gap-6 text-sm">
-//           <div className="flex items-center gap-1 cursor-pointer">
-//             <span>Services</span>
-//             <span>
-//               <ChevronDown className="w-4 h-4" />
-//             </span>
-//           </div>
-
-//           <div className="flex items-center gap-1 cursor-pointer">
-//             <span>Help</span>
-//             <span>
-//               <ChevronDown className="w-4 h-4" />
-//             </span>
-//           </div>
-//           <div className="flex items-center gap-1 cursor-pointer">
-//             <FaShoppingCart />
-//             <span>Cart (0)</span>
-//           </div>
-//           <span className="cursor-pointer text-gray-300">Login</span>
-//           <button className="bg-[#7D0101] hover:bg-orange-700 text-white px-4 py-1.5 cursor-pointer rounded-md">
-//             Sign up
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+};
