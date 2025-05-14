@@ -114,7 +114,7 @@ const ProductDescription = () => {
 };
 const ProductName = () => {
   return (
-    <p className="text-[34px] font-bold tracking-tighter leading-[37px]">
+    <p className="text-xl font-bold tracking-tighter leading-[37px]">
       Mixed Horizontal PDU 4 x C13 + 5 x C19
     </p>
   );
