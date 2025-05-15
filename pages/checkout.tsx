@@ -408,38 +408,6 @@ const CheckoutPage = () => {
             <div className="border-b border-[#EEEEEE] mb-6">
               <h2 className="text-sm font-semibold mb-2">Order Summary</h2>
             </div>
-            {/* <div className="border-b border-[#EEEEEE] mb-6">
-              <div className="flex items-center gap-4 mb-4">
-                <img
-                  src="/images/pdu1.png"
-                  alt="Product"
-                  className="w-16 h-16 object-cover rounded"
-                />
-                <div>
-                  <p className="text-sm font-medium">
-                    Get proof of delivery with Hikvision
-                  </p>
-                  <p className="text-xs text-gray-500">Qty 1</p>
-                </div>
-                <span className="ml-auto text-sm font-medium">₦500,000.00</span>
-              </div>
-            </div>
-            <div className="border-b border-[#EEEEEE]">
-              <div className="text-sm space-y-2">
-                <div className="flex justify-between">
-                  <span>Subtotal</span>
-                  <span>₦500,000.00</span>
-                </div>
-                <div className="flex justify-between mb-4">
-                  <span>Shipping fees</span>
-                  <span>₦5,000.00</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-between font-semibold mt-4 mb-4">
-              <span>Total</span>
-              <span>₦505,000.00</span>
-            </div> */}
             <div className="border-b border-[#EEEEEE] mb-6 space-y-4">
               {cart.map((item, index) => (
                 <div key={index} className="flex items-center gap-4 mb-4">
