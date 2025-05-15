@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import CardPaymentModal from "@/components/CardPaymentModal";
+import { useCart } from "../contexts/CartContext";
 
 interface FormValues {
   firstName: string;
@@ -38,6 +39,7 @@ const CheckoutPage = () => {
   const [selectedDelivery, setSelectedDelivery] = useState("");
   const [selectedPayment, setSelectedPayment] = useState("");
   const [showCardModal, setShowCardModal] = useState(false);
+  const { cart } = useCart();
 
   const onSubmit = (data: FormValues) => {
     console.log("Submitted Data:", data);
@@ -47,6 +49,26 @@ const CheckoutPage = () => {
       alert("Proceeding with: " + data.payment);
     }
   };
+
+  const shippingFee = 5000;
+
+  const subtotal  = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const vat = cart.reduce((acc, item) => acc + item.vat * item.quantity, 0);
+
+  const total = subtotal + vat + shippingFee;
+
+  const formatAmount = (amt: number) =>
+    new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+      currencyDisplay: "code",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amt);
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] px-4 md:px-12 py-25">
@@ -113,7 +135,9 @@ const CheckoutPage = () => {
                   {...register("email", { required: "Email is required" })}
                 />
                 {errors.email && (
-                  <p className="text-sm text-[#7D0101]">{errors.email.message}</p>
+                  <p className="text-sm text-[#7D0101]">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
               <div>
@@ -126,7 +150,9 @@ const CheckoutPage = () => {
                   })}
                 />
                 {errors.phone && (
-                  <p className="text-sm text-[#7D0101]">{errors.phone.message}</p>
+                  <p className="text-sm text-[#7D0101]">
+                    {errors.phone.message}
+                  </p>
                 )}
               </div>
               <div className="col-span-2">
@@ -164,11 +190,36 @@ const CheckoutPage = () => {
                         <SelectValue placeholder="Select your region" />
                       </SelectTrigger>
                       <SelectContent className="bg-[#F0F4F8] text-black">
-                        <SelectItem value="north" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">North</SelectItem>
-                        <SelectItem value="south" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">South</SelectItem>
-                        <SelectItem value="east" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">East</SelectItem>
-                        <SelectItem value="west" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">West</SelectItem>
-                        <SelectItem value="central" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Central</SelectItem>
+                        <SelectItem
+                          value="north"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          North
+                        </SelectItem>
+                        <SelectItem
+                          value="south"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          South
+                        </SelectItem>
+                        <SelectItem
+                          value="east"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          East
+                        </SelectItem>
+                        <SelectItem
+                          value="west"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          West
+                        </SelectItem>
+                        <SelectItem
+                          value="central"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          Central
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   )}
@@ -181,7 +232,7 @@ const CheckoutPage = () => {
               </div>
               <div>
                 <Label htmlFor="city" className="mb-2">
-                  City
+                  State
                 </Label>
                 <Controller
                   name="city"
@@ -193,23 +244,68 @@ const CheckoutPage = () => {
                         <SelectValue placeholder="Select your city" />
                       </SelectTrigger>
                       <SelectContent className="bg-[#F0F4F8] text-black">
-                        <SelectItem value="lagos" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Lagos</SelectItem>
-                        <SelectItem value="abuja" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Abuja</SelectItem>
-                        <SelectItem value="port-harcourt" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">
+                        <SelectItem
+                          value="lagos"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          Lagos
+                        </SelectItem>
+                        <SelectItem
+                          value="abuja"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          Abuja
+                        </SelectItem>
+                        <SelectItem
+                          value="port-harcourt"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
                           Port Harcourt
                         </SelectItem>
-                        <SelectItem value="kano" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Kano</SelectItem>
-                        <SelectItem value="ibadan" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Ibadan</SelectItem>
-                        <SelectItem value="enugu" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Enugu</SelectItem>
-                        <SelectItem value="benin-city" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Benin City</SelectItem>
-                        <SelectItem value="jos" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Jos</SelectItem>
-                        <SelectItem value="kaduna" className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer">Kaduna</SelectItem>
+                        <SelectItem
+                          value="kano"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          Kano
+                        </SelectItem>
+                        <SelectItem
+                          value="ibadan"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          Ibadan
+                        </SelectItem>
+                        <SelectItem
+                          value="enugu"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          Enugu
+                        </SelectItem>
+                        <SelectItem
+                          value="benin-city"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          Benin City
+                        </SelectItem>
+                        <SelectItem
+                          value="jos"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          Jos
+                        </SelectItem>
+                        <SelectItem
+                          value="kaduna"
+                          className="hover:bg-[#E0ECF4] focus:bg-[#D0E4F0] cursor-pointer"
+                        >
+                          Kaduna
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   )}
                 />
                 {errors.city && (
-                  <p className="text-sm text-[#7D0101]">{errors.city.message}</p>
+                  <p className="text-sm text-[#7D0101]">
+                    {errors.city.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -245,7 +341,9 @@ const CheckoutPage = () => {
                             : "border border-[#EEEEEE]"
                         }`}
                       >
-                        <span className="flex items-center gap-2 ">{label}</span>
+                        <span className="flex items-center gap-2 ">
+                          {label}
+                        </span>
                         <RadioGroupItem value={value} />
                       </Label>
                     ))}
@@ -310,7 +408,7 @@ const CheckoutPage = () => {
             <div className="border-b border-[#EEEEEE] mb-6">
               <h2 className="text-sm font-semibold mb-2">Order Summary</h2>
             </div>
-            <div className="border-b border-[#EEEEEE] mb-6">
+            {/* <div className="border-b border-[#EEEEEE] mb-6">
               <div className="flex items-center gap-4 mb-4">
                 <img
                   src="/images/pdu1.png"
@@ -341,6 +439,46 @@ const CheckoutPage = () => {
             <div className="flex justify-between font-semibold mt-4 mb-4">
               <span>Total</span>
               <span>₦505,000.00</span>
+            </div> */}
+            <div className="border-b border-[#EEEEEE] mb-6 space-y-4">
+              {cart.map((item, index) => (
+                <div key={index} className="flex items-center gap-4 mb-4">
+                  <img
+                    src={item.images[0] || "/images/placeholder.png"}
+                    alt={item.name}
+                    className="w-16 h-16 object-cover rounded"
+                  />
+                  <div>
+                    <p className="text-sm font-medium">{item.name}</p>
+                    <p className="text-xs text-gray-500">Qty {item.quantity}</p>
+                  </div>
+                  <span className="ml-auto text-sm font-medium">
+                    {formatAmount(item.price * item.quantity).toLocaleString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="border-b border-[#EEEEEE]">
+              <div className="text-sm space-y-2">
+                <div className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span>{formatAmount(subtotal).toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between text-[#7D0101]">
+                  <span>Vat</span>
+                  <span>{formatAmount(vat).toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between mb-4">
+                  <span>Shipping fees</span>
+                  <span>{formatAmount(shippingFee).toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-between font-semibold mt-4 mb-4">
+              <span>Total</span>
+              <span>{formatAmount(total).toLocaleString()}</span>
             </div>
 
             {/* Promo Code */}
