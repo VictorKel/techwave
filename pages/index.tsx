@@ -36,6 +36,6 @@ export default function Home() {
         <PromoBanner />
         <Newsletter />
       </main>
-    </div>
+    </div> 
   );
 }

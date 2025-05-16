@@ -10,10 +10,14 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({ image, title, price, vatPrice }: ProductCardProps) {
-  const formatter = new Intl.NumberFormat('en-NG', {
-    style: 'currency',
-    currency: 'NGN',
-  });
+  const formatAmount = (amt: number) =>
+    new Intl.NumberFormat('en-NG', {
+      style: 'currency',
+      currency: 'NGN',
+      currencyDisplay: 'code',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amt);
 
   const altText = typeof title === 'string' ? title : 'Product Image';
 
@@ -26,7 +30,7 @@ export default function ProductCard({ image, title, price, vatPrice }: ProductCa
           src={image}
           alt={altText}
           fill
-          className="object-contain"
+          className="object-cover"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
       </div>
@@ -35,7 +39,7 @@ export default function ProductCard({ image, title, price, vatPrice }: ProductCa
         <div className="flex items-center justify-between text-sm font-medium text-black mb-6">
           <h3 className="leading-tight">{title}</h3>
           <span className="font-semibold text-[#1A1A1A]">
-            {formatter.format(price)}
+            {formatAmount(price)}
           </span>
         </div>
 
@@ -45,7 +49,7 @@ export default function ProductCard({ image, title, price, vatPrice }: ProductCa
             <ChevronDown className="w-4 h-4" />
           </div>
           <span className="text-[#7D0101] font-semibold">
-            VAT: {formatter.format(vatPrice)}
+            VAT: {formatAmount(vatPrice)}
           </span>
         </div>
       </div>

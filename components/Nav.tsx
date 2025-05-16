@@ -2,10 +2,11 @@ import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link"
+import Link from "next/link";
 import SearchModal from "@/components/SearchModal";
 import CartModal from "@/components/CartModal";
 import { useRouter } from "next/router";
+import { useCart } from "../contexts/CartContext";
 
 export default function Nav() {
   const [navBg, setNavBg] = useState(false);
@@ -14,9 +15,24 @@ export default function Nav() {
   const [showCategories, setShowCategories] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const router = useRouter();
+  const { cart } = useCart();
+  const [cartCount, setCartCount] = useState(0);
+  const [bounce, setBounce] = useState(false);
 
   const categoryRef = useRef<HTMLDivElement>(null);
   const helpRef = useRef<HTMLDivElement>(null);
+
+  // Calculate total quantity
+  const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  useEffect(() => {
+    if (totalQuantity !== cartCount) {
+      setBounce(true);
+      setCartCount(totalQuantity);
+      const timeout = setTimeout(() => setBounce(false), 300); // remove bounce after animation
+      return () => clearTimeout(timeout);
+    }
+  }, [totalQuantity]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,7 +91,13 @@ export default function Nav() {
         }`}
       >
         <div className="text-white flex items-center h-full justify-between w-[90%] xl:w-[87%] mx-auto ">
-          <Image src="/images/Logo.png" alt="Logo" width={150} height={30} />
+          <Image
+            src="/images/Logo.png"
+            alt="Logo"
+            width={150}
+            height={30}
+            onClick={() => router.push("/")}
+          />
 
           <div className="flex-1 mx-8">
             <div
@@ -88,8 +110,11 @@ export default function Nav() {
           </div>
 
           <div className="flex items-center gap-6 text-sm">
-            <div className="flex items-center gap-1 cursor-pointer" onClick={() => router.push("/services")}>
-              <span>Services</span> 
+            <div
+              className="flex items-center gap-1 cursor-pointer"
+              onClick={() => router.push("/services")}
+            >
+              <span>Services</span>
             </div>
 
             {/* Category Dropdown */}
@@ -175,11 +200,19 @@ export default function Nav() {
             </div>
 
             <div
-              className="flex items-center gap-1 cursor-pointer"
+              className="relative cursor-pointer"
               onClick={() => setIsCartOpen(true)}
             >
-              <FaShoppingCart />
-              <span>Cart (0)</span>
+              <FaShoppingCart className="text-lg" />
+              {totalQuantity > 0 && (
+                <span
+                  className={`absolute -top-3 -right-3 bg-[#7D0101] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full transition-transform duration-300 ${
+                    bounce ? "animate-bounce-cart" : ""
+                  }`}
+                >
+                  {totalQuantity}
+                </span>
+              )}
             </div>
 
             <span className="cursor-pointer text-gray-300">Login</span>
@@ -194,4 +227,4 @@ export default function Nav() {
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
-};
+}
