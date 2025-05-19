@@ -139,4 +139,4 @@ const MobileNav = ({ closeNav, showNav }: Props) => {
   );
 };
 
-export default MobileNav;
+export default MobileNav; 
