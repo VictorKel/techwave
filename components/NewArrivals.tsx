@@ -6,7 +6,7 @@ export default function NewArrivals() {
       image: "/images/pdu2.png",
       title: (
         <>
-          Mixed Horizontal PDU <br /> 4 x C13 + 5 x C19
+          Mixed Horizontal PDU  4 x C13 + 5 x C19
         </>
       ),
       price: 500000,
@@ -16,7 +16,7 @@ export default function NewArrivals() {
       image: "/images/pdu1.png",
       title: (
         <>
-          Mixed Horizontal PDU <br /> 4 x C13 + 5 x C19
+          Mixed Horizontal PDU  4 x C13 + 5 x C19
         </>
       ),
       price: 500000,
@@ -26,7 +26,7 @@ export default function NewArrivals() {
       image: "/images/router.png",
       title: (
         <>
-          Mercusys AC12 Cable Router  Dual <br /> Band with Switch 3x 10/100
+          Mercusys AC12 Cable Router  Dual  Band with Switch 3x 10/100
         </>
       ),
       price: 5000000,
@@ -39,7 +39,7 @@ export default function NewArrivals() {
     <section className="p-6 w-[90%] md:w-[90%] mx-auto">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold">New Arrivals</h2>
-        <button className="text-sm text-[#006699] hover:underline flex items-center gap-1">
+        <button className="text-sm text-[#7D0101] hover:underline flex items-center gap-1">
           See all
           <svg
             xmlns="http://www.w3.org/2000/svg"

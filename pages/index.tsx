@@ -1,5 +1,5 @@
 import { Instrument_Sans } from "next/font/google";
-import Nav from "../components/Nav";
+import Nav from "../components/NavBar/Nav";
 import Hero from "../components/Hero";
 import BestSellers from "../components/BestSellers";
 import FeaturedProducts from "../components/FeaturedProducts";

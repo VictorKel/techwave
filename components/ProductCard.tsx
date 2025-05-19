@@ -9,6 +9,7 @@ type ProductCardProps = {
   vatPrice: number;
 };
 
+
 export default function ProductCard({ image, title, price, vatPrice }: ProductCardProps) {
   const formatAmount = (amt: number) =>
     new Intl.NumberFormat('en-NG', {
@@ -25,7 +26,7 @@ export default function ProductCard({ image, title, price, vatPrice }: ProductCa
 
   return (
     <div className="bg-white transition-transform hover:scale-[1.02] duration-200 space-y-4">
-      <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-white" onClick={() => router.push("/products")}>
+      <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-white" onClick={() => router.push("/product/123")}>
         <Image
           src={image}
           alt={altText}
@@ -35,12 +36,12 @@ export default function ProductCard({ image, title, price, vatPrice }: ProductCa
         />
       </div>
 
-      <div className="px-4 pt-3 pb-4">
-        <div className="flex items-center justify-between text-sm font-medium text-black mb-6">
-          <h3 className="leading-tight">{title}</h3>
-          <span className="font-semibold text-[#1A1A1A]">
+      <div className="px-2 pt-3 pb-4 space-y-4">
+        <h3 className="leading-tight">{title}</h3>
+        <div className="flex items-center  text-sm font-medium text-black mb-6">
+          {/* <span className="font-semibold text-[#1A1A1A]">
             {formatAmount(price)}
-          </span>
+          </span> */}
         </div>
 
         <div className="flex items-center justify-between text-xs mt-1">
@@ -48,8 +49,11 @@ export default function ProductCard({ image, title, price, vatPrice }: ProductCa
             <span>Color</span>
             <ChevronDown className="w-4 h-4" />
           </div>
-          <span className="text-[#7D0101] font-semibold">
+          {/* <span className="text-[#7D0101] font-semibold">
             VAT: {formatAmount(vatPrice)}
+          </span> */}
+          <span className="font-semibold text-[#7D0101]">
+            {formatAmount(price)}
           </span>
         </div>
       </div>

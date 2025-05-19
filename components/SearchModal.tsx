@@ -37,7 +37,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
   }, [query]);
 
   return (
-    <Dialog open={isOpen} onClose={onClose} className="relative inset-0 z-[1100]">
+    <Dialog open={isOpen} onClose={onClose} className="relative inset-0 z-[110009]">
       <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" aria-hidden="true" />
       <div className="fixed inset-0 flex items-start justify-center pt-40 px-4">
         <Dialog.Panel className="bg-white rounded-xl shadow-xl w-full max-w-xl p-6">

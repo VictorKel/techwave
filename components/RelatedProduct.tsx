@@ -1,4 +1,4 @@
-import { RelatedProduct } from "../types";
+import {  RelatedProduct } from "../types";
 import { ChevronDown } from "lucide-react";
 import { useRouter } from "next/router";
 import Image from 'next/image';
@@ -18,6 +18,7 @@ export default function RelatedProducts({ products }: Props) {
     }).format(amt);
    
     const router = useRouter();
+
     const altText = typeof name === 'string' ? name : 'Product Image';
 
   return (
@@ -47,7 +48,7 @@ export default function RelatedProducts({ products }: Props) {
           <div key={prod.id} className="bg-white transition-transform hover:scale-[1.02] duration-200 space-y-4">
             <div
               className="relative w-full aspect-square overflow-hidden rounded-2xl bg-white"
-              onClick={() => router.push("/")}
+              
             >
               <Image
                 src={prod.image}

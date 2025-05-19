@@ -17,7 +17,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
     0
   );
   const vat = cart.reduce((acc, item) => acc + item.vat * item.quantity, 0);
-  const total = subtotal + vat;
+  const total = subtotal;
 
   const format = (amt: number) =>
     new Intl.NumberFormat("en-NG", {
@@ -34,7 +34,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[1100] bg-black/50 flex justify-end">
+    <div className="fixed inset-0 z-[1200000] bg-black/50 flex justify-end">
       <div className="bg-white w-full max-w-md h-full p-6 flex flex-col relative overflow-y-auto">
         {/* Header */}
         <div className="flex justify-between items-center pb-3 border-b border-[#EEEEEE]">
@@ -118,10 +118,10 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                   <span>Subtotal:</span>
                   <span>{format(subtotal)}</span>
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <span>VAT:</span>
                   <span>{format(vat)}</span>
-                </div>
+                </div> */}
                 <div className="flex justify-between font-bold">
                   <span>Total:</span>
                   <span>{format(total)}</span>

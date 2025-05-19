@@ -4,17 +4,19 @@ import RelatedProduct from '../../components/RelatedProduct';
 import Specifications from '../../components/Specifications';
 import Newsletter from '../../components/Newsletter';
 import { Product } from '../../types';
+import router from 'next/router';
 
 interface Props {
   product: Product;
 }
 
 export default function ProductPage({ product }: Props) {
+
   return (
     <>
       <ProductDetails product={product} />
       <Specifications product={product} />
-      <RelatedProduct products={mockRelatedProducts} /> 
+      <RelatedProduct products={mockRelatedProducts}  /> 
       <Newsletter />
     </>
   );
@@ -49,7 +51,8 @@ const mockRelatedProducts = [
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { productId } = context.params as { productId: string };
 
-  const product: Product = {
+  const product: Product = 
+  {
     id: productId,
     name: 'Mixed Horizontal PDU 4 x C13 + 5 x C19',
     part: 'E700002',

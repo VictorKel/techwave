@@ -66,15 +66,15 @@ export default function Footer() {
         </div>
       </div>
       <div className='border-t w-full items-center mt-15'>
-        <div className="flex justify-between mt-4">
+        <div className="flex mt-4">
           <p className='text-center font-semibold text-[#ACACAC]'>
             Copyright © Dartwood Global Solutions LTD          
           </p>
-          <div className='flex gap-4 mb-10'>
+          {/* <div className='flex gap-4 mb-10'>
             <Image src="/images/paypal.png" alt="Logo" width={55} height={45} />
             <Image src="/images/stripe.png" alt="Logo" width={55} height={45} />
             <Image src="/images/master.png" alt="Logo" width={55} height={45} />
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

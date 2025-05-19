@@ -39,7 +39,7 @@ export default function ProductDetails({ product }: Props) {
 
   return (
     <section className="p-6 w-[90%] md:w-[90%] mx-auto">
-      <div className="pt-20 flex space-x-4">
+      <div className="pt-20 flex space-x-4 text-base md-flex-col-reverse">
         <a href="/">Home / </a>
         <h2>Cabling / </h2>
         <h2 className="text-[#272727]">{product.name}</h2>
@@ -51,7 +51,7 @@ export default function ProductDetails({ product }: Props) {
           <img
             src={selectedImage}
             alt={product.name}
-            className="rounded-lg w-full max-h-[570px] object-cover"
+            className="rounded-lg w-full h-[570px] object-cover"
           />
           <div className="flex gap-2 mt-4">
             {product.images.map((img, i) => (
@@ -59,7 +59,7 @@ export default function ProductDetails({ product }: Props) {
                 key={i}
                 src={img}
                 onClick={() => setSelectedImage(img)}
-                className={`w-16 h-16 object-cover rounded-md cursor-pointer border-2 ${
+                className={`w-16 h-16 object-cover rounded-md cursor-pointer border-2 transition-transform hover:scale-[1.02] duration-200 ${
                   selectedImage === img
                     ? "border-[#7D0101]"
                     : "border-transparent"
@@ -100,17 +100,17 @@ export default function ProductDetails({ product }: Props) {
               <p className="text-sm text-gray-500">
                 Unit Price: {formatAmount(product.price)}
               </p>
-              <p className="text-sm text-[#7D0101]">
+              {/* <p className="text-sm text-[#7D0101]">
                 Unit VAT: {formatAmount(product.vat)}
-              </p>
+              </p> */}
             </div>
             <div className="flex space-x-8">
               <p className="text-xl font-semibold text-black mt-1">
                 Total: {formatAmount(product.price * quantity)}
               </p>
-              <p className="text-md text-[#7D0101] mt-1">
+              {/* <p className="text-md text-[#7D0101] mt-1">
                 VAT: {formatAmount(product.vat * quantity)}
-              </p>
+              </p> */}
             </div>
           </div>
 

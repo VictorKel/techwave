@@ -6,7 +6,7 @@ export default function FeaturedProducts() {
       image: "/images/cam1.png",
       title: (
         <>
-          Get proof of delivery with <br /> Hikvision
+          Get proof of delivery with  Hikvision
         </>
       ),
       price: 500000,
@@ -16,7 +16,7 @@ export default function FeaturedProducts() {
       image: "/images/fuse.png",
       title: (
         <>
-          Compact PoE Switches 10/100 or <br /> 10/100/1000
+          Compact PoE Switches 10/100 or  10/100/1000
         </>
       ),
       price: 5000000,
@@ -26,7 +26,7 @@ export default function FeaturedProducts() {
       image: "/images/cam2.png",
       title: (
         <>
-          Discover Hikvision`&apos;s Latest <br /> ColorVu Technology
+          Discover Hikvision's Latest  ColorVu Technology
         </>
       ),
       price: 500000,

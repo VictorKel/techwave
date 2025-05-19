@@ -57,9 +57,9 @@ const CheckoutPage = () => {
     0
   );
 
-  const vat = cart.reduce((acc, item) => acc + item.vat * item.quantity, 0);
+  // const vat = cart.reduce((acc, item) => acc + item.vat * item.quantity, 0);
 
-  const total = subtotal + vat + shippingFee;
+  const total = subtotal  + shippingFee;
 
   const formatAmount = (amt: number) =>
     new Intl.NumberFormat("en-NG", {
@@ -87,16 +87,16 @@ const CheckoutPage = () => {
       )}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col lg:flex-row gap-8"
+        className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full"
       >
         {/* Left Side */}
-        <div className="flex-1 flex flex-col gap-8">
+        <div className="flex-1 flex flex-col gap-6 sm:gap-8">
           {/* Customer Address */}
           <div className="bg-white rounded-md p-6 shadow-sm">
             <div className="border-b border-[#EEEEEE] text-gray-300 mb-6">
               <h2 className="text-sm font-semibold mb-2">CUSTOMER ADDRESS</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 gap-4">
               <div>
                 <Label htmlFor="firstName">First Name</Label>
                 <Input
@@ -403,7 +403,7 @@ const CheckoutPage = () => {
         </div>
 
         {/* Right Side - Order Summary */}
-        <div className="w-full lg:w-[400px]">
+        <div className="w-full max-w-full lg:max-w-[400px] lg:sticky top-20">
           <div className="bg-white rounded-md p-6 shadow-sm">
             <div className="border-b border-[#EEEEEE] mb-6">
               <h2 className="text-sm font-semibold mb-2">Order Summary</h2>
@@ -414,7 +414,7 @@ const CheckoutPage = () => {
                   <img
                     src={item.images[0] || "/images/placeholder.png"}
                     alt={item.name}
-                    className="w-16 h-16 object-cover rounded"
+                    className="w-14 h-14 md:w-16 md:h-16 object-cover rounded"
                   />
                   <div>
                     <p className="text-sm font-medium">{item.name}</p>
@@ -433,10 +433,10 @@ const CheckoutPage = () => {
                   <span>Subtotal</span>
                   <span>{formatAmount(subtotal).toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between text-[#7D0101]">
+                {/* <div className="flex justify-between text-[#7D0101]">
                   <span>Vat</span>
                   <span>{formatAmount(vat).toLocaleString()}</span>
-                </div>
+                </div> */}
                 <div className="flex justify-between mb-4">
                   <span>Shipping fees</span>
                   <span>{formatAmount(shippingFee).toLocaleString()}</span>
@@ -450,9 +450,9 @@ const CheckoutPage = () => {
             </div>
 
             {/* Promo Code */}
-            <div className="bg-[#FAFAFA] p-4 rounded mb-4">
-              <h2>Promo Code</h2>
-              <div className="p-4">
+            <div className="bg-[#FAFAFA] p-4 rounded mb-4 w-full">
+              <h2 className="text-sm font-semibold mb-2">Promo Code</h2>
+              <div className="p-0 sm:p-2 md:p-4">
                 <Label htmlFor="promo">Promo Code</Label>
                 <div className="flex gap-2">
                   <Input
