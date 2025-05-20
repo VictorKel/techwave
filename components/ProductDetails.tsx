@@ -3,6 +3,7 @@ import { Product } from "../types";
 import { useCart } from "../contexts/CartContext";
 import { toast } from "react-hot-toast";
 import { FaShoppingCart } from "react-icons/fa";
+import router from "next/router";
 
 interface Props {
   product: Product;
@@ -29,35 +30,37 @@ export default function ProductDetails({ product }: Props) {
     addToCart(product, quantity);
     toast.success(`${quantity} × ${product.name} added to cart`, {
       style: {
-        borderRadius: '8px',
-        background: '#7D0101',
-        color: '#fff',
+        borderRadius: "8px",
+        background: "#7D0101",
+        color: "#fff",
       },
-      icon: '🛒',
+      icon: "🛒",
     });
   };
+
+  const altText = typeof name === 'string' ? name : 'Product Image';
 
   return (
     <section className="p-6 w-[90%] md:w-[90%] mx-auto">
       <div className="pt-20 flex space-x-4 text-base md-flex-col-reverse">
         <a href="/">Home / </a>
-        <h2>Cabling / </h2>
+        <h2>{product.category} / </h2>
         <h2 className="text-[#272727]">{product.name}</h2>
       </div>
-
       <div className="flex flex-col lg:flex-row gap-15 py-10">
-        {/* Left Side - Image */}
+        {/* Images */}
         <div className="w-full lg:w-3/5 bg-[#EBEBEB] p-3 rounded-md">
           <img
             src={selectedImage}
-            alt={product.name}
+            alt={altText}
             className="rounded-lg w-full h-[570px] object-cover"
           />
           <div className="flex gap-2 mt-4">
-            {product.images.map((img, i) => (
+            {product.images.map((img, idx) => (
               <img
-                key={i}
+                key={idx}
                 src={img}
+                alt={`${product.name}-${idx}`}
                 onClick={() => setSelectedImage(img)}
                 className={`w-16 h-16 object-cover rounded-md cursor-pointer border-2 transition-transform hover:scale-[1.02] duration-200 ${
                   selectedImage === img
@@ -69,7 +72,7 @@ export default function ProductDetails({ product }: Props) {
           </div>
         </div>
 
-        {/* Right Side - Details */}
+        {/* Info */}
         <div className="w-full lg:w-2/5">
           <h1 className="text-4xl font-bold mb-5">{product.name}</h1>
 
@@ -131,17 +134,21 @@ export default function ProductDetails({ product }: Props) {
           </div>
 
           <div className="mt-10 flex flex-col gap-4 items-center">
-            <button 
-             className=" w-full  text-gray-400 border border-[#7D010140] px-6 py-2 rounded-md"
-             onClick={handleAddToCart}
+            <button
+              className=" w-full  text-gray-400 border border-[#7D010140] px-6 py-2 rounded-md"
+              onClick={handleAddToCart}
             >
-                <div className="flex items-center justify-center w-full gap-2">
-
-                    Add to Cart
-                    <FaShoppingCart className="text-lg ml-3 text-[#272727]" />
-                </div>
+              <div className="flex items-center justify-center w-full gap-2">
+                Add to Cart
+                <FaShoppingCart className="text-lg ml-3 text-[#272727]" />
+              </div>
             </button>
-            <button className="bg-[#7D0101] w-full text-white px-6 py-2 rounded-md">
+            <button className="bg-[#7D0101] w-full text-white px-6 py-2 rounded-md"
+              onClick={() => {
+                addToCart(product, quantity);
+                router.push("/checkout");
+              }}
+            >
               Buy Now
             </button>
           </div>
