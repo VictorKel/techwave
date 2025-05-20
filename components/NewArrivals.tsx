@@ -1,44 +1,15 @@
 import ProductCard from "./ProductCard";
+import { products } from "../data/products";
 
 export default function NewArrivals() {
-  const products = [
-    {
-      image: "/images/pdu2.png",
-      title: (
-        <>
-          Mixed Horizontal PDU  4 x C13 + 5 x C19
-        </>
-      ),
-      price: 500000,
-      vatPrice: 600000,
-    },
-    {
-      image: "/images/pdu1.png",
-      title: (
-        <>
-          Mixed Horizontal PDU  4 x C13 + 5 x C19
-        </>
-      ),
-      price: 500000,
-      vatPrice: 600000,
-    },
-    {
-      image: "/images/router.png",
-      title: (
-        <>
-          Mercusys AC12 Cable Router  Dual  Band with Switch 3x 10/100
-        </>
-      ),
-      price: 5000000,
-      vatPrice: 6000000,
-    },
-  ];
-
+  const fuseProducts = products.filter(
+    (product) => product.category === "Fuse"
+  );
 
   return (
     <section className="p-6 w-[90%] md:w-[90%] mx-auto">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">New Arrivals</h2>
+        <h2 className="text-xl font-semibold">Fuse</h2>
         <button className="text-sm text-[#7D0101] hover:underline flex items-center gap-1">
           See all
           <svg
@@ -59,11 +30,10 @@ export default function NewArrivals() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {products.map((product, index) => (
-          <ProductCard key={index} {...product} />
+        {fuseProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </section>
   );
-};
-  
+}

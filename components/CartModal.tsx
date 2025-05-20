@@ -16,7 +16,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const vat = cart.reduce((acc, item) => acc + item.vat * item.quantity, 0);
+  const vat = cart.reduce((acc, item) => acc * item.quantity, 0);
   const total = subtotal;
 
   const format = (amt: number) =>
@@ -33,6 +33,8 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  const altText = typeof name === 'string' ? name : 'Product Image';
+  
   return (
     <div className="fixed inset-0 z-[1200000] bg-black/50 flex justify-end">
       <div className="bg-white w-full max-w-md h-full p-6 flex flex-col relative overflow-y-auto">
@@ -79,7 +81,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                 >
                   <img
                     src={item.images[0]}
-                    alt={item.name}
+                    alt={altText}
                     className="w-20 h-20 object-cover"
                   />
                   <div className="flex-1 ml-4">

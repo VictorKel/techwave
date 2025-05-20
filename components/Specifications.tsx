@@ -9,6 +9,7 @@ export default function Specifications({ product }: Props) {
     <section className="py-8 p-6 w-[90%] md:w-[90%] mx-auto">
       <div className="bg-[#7D0101] p-2 w-fit rounded-sm mb-6">
         <h2 className="text-base font-semibold text-white">Specification</h2>
+        
       </div>
 
       <div className="space-y-2 text-sm items-center">

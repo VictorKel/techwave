@@ -1,44 +1,20 @@
+import router from "next/router";
 import ProductCard from "./ProductCard";
+import { products } from "../data/products";
 
 export default function FeaturedProducts() {
-  const products = [
-    {
-      image: "/images/cam1.png",
-      title: (
-        <>
-          Get proof of delivery with  Hikvision
-        </>
-      ),
-      price: 500000,
-      vatPrice: 600000,
-    },
-    {
-      image: "/images/fuse.png",
-      title: (
-        <>
-          Compact PoE Switches 10/100 or  10/100/1000
-        </>
-      ),
-      price: 5000000,
-      vatPrice: 6000000,
-    },
-    {
-      image: "/images/cam2.png",
-      title: (
-        <>
-          Discover Hikvision's Latest  ColorVu Technology
-        </>
-      ),
-      price: 500000,
-      vatPrice: 600000,
-    },
-  ];
+  const trackProducts = products.filter(
+    (product) => product.category === "Tracking Device"
+  );
 
   return (
     <section className="p-6 w-[90%] md:w-[90%] mx-auto">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">Featured Products</h2>
-        <button className="text-sm text-[#7D0101] hover:underline flex items-center gap-1">
+        <h2 className="text-xl font-semibold">Tracking Device</h2>
+        <button
+          className="text-sm text-[#7D0101] hover:underline flex items-center gap-1"
+          onClick={() => router.push("/category/tracking-devices")}
+        >
           See all
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -58,8 +34,8 @@ export default function FeaturedProducts() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {products.map((product, index) => (
-          <ProductCard key={index} {...product} /> 
+        {trackProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </section>
