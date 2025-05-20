@@ -11,7 +11,7 @@ export default function Services() {
         className="bg-cover h-[80vh] bg-center"
         style={{ backgroundImage: "url(/images/services-background.png)" }}
       >
-        <div className="pl-20 pt-[180px] text-white ">
+        <div className="pl-20 pt-45 text-white ">
           <h1 className="text-[48px] font-[350]">
             Functional Cabling Solutions
           </h1>
@@ -38,17 +38,17 @@ export default function Services() {
       </section>
       <section className="p-6 w-[90%] md:w-[90%] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="inline-flex p-4 flex-col  bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
+          <div className="inline-flex p-4 flex-col  bg-[#FAFAFA] border-[1px] border-[#CCCCCC] rounded-xl">
             <div className="p-4">
               <Image
                 src="/svg/installations.svg"
                 alt=""
-                width={25}
+                width={0}
                 height={0}
-                className="flex justify-center items-center w-[50px] h-[50px] p-2 rounded-xl bg-[#7D0101] mb-2"
+                className="flex justify-center items-center w-12 h-[50px] p-2 rounded-xl bg-[#7D0101] mb-2"
               />
-              <p className="text-[22px] font-[500] mb-2">Installations</p>
-              <p className="text-[13px] text-[#8C8C8C] w-[450px]">
+              <p className="text-2xl font-[500] mb-2">Installations</p>
+              <p className="text-sm text-[#8C8C8C] w-[100%] laptop:bg-red-200 social:bg-amber-400 2xl:text-3xl">
                 Professional setup and implementation of cabling systems. Our
                 certified technicians ensure a smooth and efficient installation
                 process.
@@ -62,19 +62,20 @@ export default function Services() {
               className="h-[200px] rounded-xl"
             />
           </div>
-          <div className="inline-flex p-4 flex-col  bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
+          <div className="inline-flex p-4 flex-col  bg-[#FAFAFA]  border-[1px] border-[#CCCCCC] rounded-xl">
             <div className="p-4">
               <Image
                 src="/svg/consultancy.svg"
                 alt=""
-                width={25}
+                width={0}
                 height={0}
-                className="flex justify-center items-center w-[50px] h-[50px] p-2 rounded-xl bg-[#7D0101] mb-2"
+                className="flex justify-center items-center h-[50px] p-2 rounded-xl bg-[#7D0101] mb-2 w-12"
               />
-              <p className="text-[22px] font-[500] mb-2">Consultancy</p>
-              <p className="text-[13px] text-[#8C8C8C] w-[450px]">
-                Expert advice and planning for your cabling infrastructure needs.  
-                Let us help you design a solution that meets your specific requirements.
+              <p className="text-2xl font-[500] mb-2">Consultancy</p>
+              <p className="text-sm text-[#8C8C8C] w-110  ">
+                Expert advice and planning for your cabling infrastructure
+                needs. Let us help you design a solution that meets your
+                specific requirements.
               </p>
             </div>
             <Image
@@ -87,7 +88,7 @@ export default function Services() {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-[10px] mb-4">
-          <div className="inline-flex py-[15px] px-[10px] flex-col  bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
+          <div className="inline-flex py-[15px] px-[10px] flex-col  bg-[#FAFAFA]  border-[1px] border-[#CCCCCC] rounded-xl">
             <Image
               src="/svg/data-recovery.svg"
               alt=""
@@ -102,7 +103,7 @@ export default function Services() {
               process.
             </p>
           </div>
-          <div className="inline-flex py-[15px] px-[10px] flex-col bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
+          <div className="inline-flex py-[15px] px-[10px] flex-col bg-[#FAFAFA] border-[1px] border-[#CCCCCC] rounded-xl">
             <Image
               src="/svg/office-solution.svg"
               alt=""
@@ -117,7 +118,7 @@ export default function Services() {
               process.
             </p>
           </div>
-          <div className="inline-flex p-4 flex-col bg-[#FAFAFA] border border-[1px] border-[#CCCCCC] rounded-xl">
+          <div className="inline-flex p-4 flex-col bg-[#FAFAFA]  border-[1px] border-[#CCCCCC] rounded-xl">
             <Image
               src="/svg/training.svg"
               alt=""
