@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+/* @import "tailwindcss/preflight" */
+@tailwind utilities;
 
 /* Optional: keep dark mode if needed */
 @custom-variant dark (&:is(.dark *));
@@ -20,7 +22,8 @@
 }
 
 @keyframes bounce-cart {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -48,10 +51,14 @@
 
 @layer utilities {
   .nav__link {
-      @apply relative text-base font-medium w-fit block after:block 
+    @apply relative text-base font-medium w-fit block after:block 
       after:content-[''] after:absolute after:h-[3px] 
       after:bg-pink-600 after:w-full after:scale-x-0 
       after:hover:scale-x-100 after:transition after:duration-300
-      after:origin-right
+      after:origin-right;
   }
+}
+@font-face {
+  font-family: "Onest";
+  src: url("/font/Onest.ttf");
 }

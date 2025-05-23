@@ -1,12 +1,13 @@
 import { Instrument_Sans } from "next/font/google";
-import Nav from "../components/NavBar/Nav";
+
+// import Nav from "../components/NavBar/Nav";
 import Hero from "../components/Hero";
 import BestSellers from "../components/BestSellers";
 import FeaturedProducts from "../components/FeaturedProducts";
 import NewArrivals from "../components/NewArrivals";
 import PromoBanner from "../components/PromoBanner";
 import Newsletter from "../components/Newsletter";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 import FeaturedProducts2 from "../components/FeaturedProducts2";
 import Head from "next/head";
 
@@ -36,6 +37,6 @@ export default function Home() {
         <PromoBanner />
         <Newsletter />
       </main>
-    </div> 
+    </div>
   );
 }
