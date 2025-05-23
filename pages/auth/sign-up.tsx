@@ -98,7 +98,7 @@ const formSchema = z
       ctx.addIssue({
         path: ["phoneNumber"],
         code: z.ZodIssueCode.custom,
-        message: `Phone number must be between ${country.minLength} and ${country.maxLength} digits for ${countryCode}`,
+        message: "Incorrect phone number",
       });
     }
   });
@@ -122,7 +122,7 @@ export default function SignUp({
     handleSubmit,
     watch,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
@@ -136,7 +136,6 @@ export default function SignUp({
   const maxPhoneLength = phoneLengths[countryCode]?.maxLength || 14;
 
   const handleSubmitInfo = async (data: FormData) => {
-    console.log("Data submitted ✅", data);
     try {
       // Get existing users (array or null)
       const existingUsersJSON = localStorage.getItem("registeredUsers");
@@ -196,7 +195,7 @@ export default function SignUp({
             animate={{ opacity: 1, x: 10 }}
             exit={{ opacity: 0, x: 50 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-3 right-[30px] transform -translate-x-1/2 bg-[#00690b] text-white text-[12px] px-6 py-3 rounded shadow-lg z-50"
+            className="fixed top-3 right-[30px] transform -translate-x-1/2 bg-[#7d0101] text-white text-[12px] px-6 py-3 rounded shadow-lg z-50"
           >
             {errorMessage}
           </motion.div>
@@ -210,7 +209,7 @@ export default function SignUp({
             exit={{ opacity: 0, x: 50 }}
             transition={{ duration: 0.3 }}
             className="fixed top-3 right-[30px] transform -translate-x-1/2 text-[12px]
-                 bg-[#fff] border border-[#00690b] text-[#00690b] px-6 py-3 rounded shadow-lg z-50"
+                 bg-[#fff] border border-[#7d0101] text-[#7d0101] px-6 py-3 rounded shadow-lg z-50"
           >
             {successMessage}
           </motion.div>
@@ -257,11 +256,11 @@ export default function SignUp({
               {...register("firstName")}
               type="text"
               id="firstName"
-              className="w-60 border-1 rounded focus:border-[#7d0101] focus:border-2 h-10 py-2 px-3 placeholder:text-sm text-sm placeholder:text-[#27272726] "
+              className="w-56 border-2 rounded focus:border-[#7d0101]  h-10 py-2 px-3 placeholder:text-sm text-sm placeholder:text-[#27272726] "
               placeholder="Enter your first name"
             />
             {errors.firstName && (
-              <p className="text-[10px] text-[#7d0101]">
+              <p className="text-[10px] text-[#7d0101] font-medium">
                 {errors.firstName.message}
               </p>
             )}
@@ -275,10 +274,10 @@ export default function SignUp({
               type="text"
               id="lastName"
               placeholder="Enter your last name"
-              className="w-60 border-1 rounded border-[#27272726] focus:border-2 text-[#272727] placeholder:text-[#27272726] focus:border-[#7d0101] h-10 py-2 px-3  placeholder:text-sm text-sm"
+              className="w-56 border-2 rounded border-[#27272726]  text-[#272727] placeholder:text-[#27272726] focus:border-[#7d0101] h-10 py-2 px-3  placeholder:text-sm text-sm"
             />
             {errors.lastName && (
-              <p className="text-xs text-[#7d0101]">
+              <p className="text-[10px] font-medium text-[#7d0101]">
                 {errors.lastName.message}
               </p>
             )}
@@ -293,10 +292,9 @@ export default function SignUp({
             <div className="  inline-flex justify-center items-center space-x-2 px-2  h-10 border mx-auto w-34">
               {selectedCountry && (
                 <div>
-                  <span>{selectedCountry.name}</span>
+                  {/* <span>{selectedCountry.name}</span> */}
                   <Image
-                    // src={selectedCountry.flag}
-                    src="/icons/ng-flag.svg"
+                    src={selectedCountry.flag}
                     alt={selectedCountry.name}
                     height={18}
                     width={24}
@@ -309,11 +307,11 @@ export default function SignUp({
                 placeholder="+234"
                 className="text-sm text-[#272727] placeholder:text-sm placeholder:text-[#272727] w-12 h-full focus:outline-none"
               />
-              {errors.countryCode && (
+              {/* {errors.countryCode && (
                 <p className="text-[10px] text-[#7d0101]">
                   {errors.countryCode.message}
                 </p>
-              )}
+              )} */}
             </div>
             <input
               {...register("phoneNumber")}
@@ -331,8 +329,13 @@ export default function SignUp({
             />
           </div>
           {errors.phoneNumber && (
-            <p className="text-xs text-[#7d0101]">
+            <p className="text-[10px] font-medium text-[#7d0101]">
               {errors.phoneNumber.message}
+            </p>
+          )}
+          {errors.countryCode && (
+            <p className="text-[10px] font-medium text-[#7d0101]">
+              {errors.countryCode.message}
             </p>
           )}
         </div>
@@ -347,10 +350,12 @@ export default function SignUp({
             placeholder="Enter your email address"
             className=" placeholder:text-sm placeholder:text-[#27272726] text-sm py-2 px-3 border-1 focus:border-2  h-10 rounded w-full focus:border-[#7d0101] text-[]"
           />
+          {errors.email && (
+            <p className="text-[10px] font-medium text-[#7d0101]">
+              {errors.email.message}
+            </p>
+          )}
         </div>
-        {errors.email && (
-          <p className="text-xs text-[#7d0101]">{errors.email.message}</p>
-        )}
         <div className="mb-6">
           <label className="text-sm mb-3" htmlFor="password">
             Password
@@ -370,7 +375,9 @@ export default function SignUp({
             </p>
           </div>
           {errors.password && (
-            <p className="text-xs text-[#7d0101]">{errors.password.message}</p>
+            <p className="text-[10px] font-medium text-[#7d0101]">
+              {errors.password.message}
+            </p>
           )}
         </div>
         <div className="mb-6">
@@ -393,7 +400,7 @@ export default function SignUp({
               {showConfirmPassword ? "Hide" : "Show"}
             </p>
             {errors.confirmPassword && (
-              <p className="text-xs text-[#7d0101]">
+              <p className="text-[10px] font-medium text-[#7d0101]">
                 {errors.confirmPassword.message}
               </p>
             )}
@@ -420,7 +427,7 @@ export default function SignUp({
         </div>
         <button
           type="submit"
-          disabled={!isValid}
+          // disabled={!isValid}
           className={` flex justify-center items-center w-full h-11 mb-14 cursor-pointer text-sm bg-[#7d0101] rounded text-[#fff] ${onest.className} `}
         >
           Create an account
