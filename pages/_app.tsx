@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   const noLayoutRoutes = [
-    "/auth/log-in",
+    "/auth/login",
     "/auth/sign-up",
     "/auth/forgot-password",
     "/auth/reset-password",

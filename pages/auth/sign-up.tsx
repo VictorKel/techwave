@@ -173,7 +173,7 @@ export default function SignUp({
 
       setTimeout(() => {
         setShowSuccessModal(false);
-        router.push("/log-in");
+        router.push("/auth/login");
       }, 2200);
       reset();
     } catch {
@@ -193,8 +193,8 @@ export default function SignUp({
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 10 }}
             exit={{ opacity: 0, x: 50 }}
-            transition={{ duration: 0.3 }}
-            className={`fixed top-3 right-[30px] transform -translate-x-1/2  bg-[#7d0101] text-[#7d01011a] text-xs font-medium px-6 py-3 rounded shadow-lg z-50 ${onest.className} `}
+            transition={{ duration: 0.4 }}
+            className={`fixed top-3 right-0.5 transform -translate-x-6  bg-[#7d0101] text-[#fff] text-xs font-medium px-3 py-3 rounded shadow-lg z-50 ${onest.className} `}
           >
             {errorMessage}
           </motion.div>
@@ -242,7 +242,7 @@ export default function SignUp({
         </p>
         <p className="text-xs font-medium  text-[#272727B2] mt-2 mb-12 ">
           Already have an account ?{" "}
-          <Link href="/login" className="text-[#7D0101]">
+          <Link href="/auth/login" className="text-[#7D0101]">
             Login
           </Link>
         </p>
