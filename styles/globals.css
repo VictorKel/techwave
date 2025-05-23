@@ -57,6 +57,15 @@
       after:hover:scale-x-100 after:transition after:duration-300
       after:origin-right;
   }
+    /* Hide number input spinners */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    @apply appearance-none m-0;
+  }
+
+  /* input[type='number'] { */
+    /* -moz-appearance: textfield; Firefox */
+  /* } */
 }
 @font-face {
   font-family: "Onest";
