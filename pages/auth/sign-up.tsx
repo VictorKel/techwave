@@ -38,8 +38,8 @@ const passwordSchema = z
 
 const formSchema = z
   .object({
-    firstName: z.string().min(3, "Minimum of 3 letters"),
-    lastName: z.string().min(3, "Minimum of 3 letters"),
+    firstName: z.string().min(2, "Minimum of 2 letters"),
+    lastName: z.string().min(2, "Minimum of 2  letters"),
     email: z.string().email("Invalid email"),
 
     countryCode: z
@@ -64,7 +64,6 @@ const formSchema = z
     password: passwordSchema,
     confirmPassword: z.string(),
   })
-
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
@@ -169,7 +168,7 @@ export default function SignUp({
 
       const updatedUsers = [...existingUsers, userWithHashedPassword];
       localStorage.setItem("registeredUsers", JSON.stringify(updatedUsers));
-      setSuccessMessage("Sign-up Successful!");
+      setSuccessMessage(" Sign-up Successful!");
       setShowSuccessModal(true);
 
       setTimeout(() => {
@@ -195,7 +194,7 @@ export default function SignUp({
             animate={{ opacity: 1, x: 10 }}
             exit={{ opacity: 0, x: 50 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-3 right-[30px] transform -translate-x-1/2 bg-[#7d0101] text-white text-[12px] px-6 py-3 rounded shadow-lg z-50"
+            className={`fixed top-3 right-[30px] transform -translate-x-1/2  bg-[#7d0101] text-[#7d01011a] text-xs font-medium px-6 py-3 rounded shadow-lg z-50 ${onest.className} `}
           >
             {errorMessage}
           </motion.div>
@@ -209,7 +208,7 @@ export default function SignUp({
             exit={{ opacity: 0, x: 50 }}
             transition={{ duration: 0.3 }}
             className="fixed top-3 right-[30px] transform -translate-x-1/2 text-[12px]
-                 bg-[#fff] border border-[#7d0101] text-[#7d0101] px-6 py-3 rounded shadow-lg z-50"
+                 bg-[#7d01011a] border-2 border-[#7d0101] text-[#7d0101] px-6 py-3 rounded text-xs font-medium shadow-lg z-50"
           >
             {successMessage}
           </motion.div>
@@ -249,9 +248,7 @@ export default function SignUp({
         </p>
         <div className="flex justify-between mb-6 ">
           <div className="">
-            <label className="text-sm mb-3 text-[#272727]" htmlFor="firstName">
-              First Name
-            </label>
+            <p className="text-sm mb-3 text-[#272727]">First Name</p>
             <input
               {...register("firstName")}
               type="text"
@@ -266,9 +263,7 @@ export default function SignUp({
             )}
           </div>
           <div>
-            <label className="text-sm mb-3 text-[#272727]" htmlFor="lastName">
-              Last Name
-            </label>
+            <p className="text-sm mb-3 text-[#272727]">Last Name</p>
             <input
               {...register("lastName")}
               type="text"
@@ -284,34 +279,34 @@ export default function SignUp({
           </div>
         </div>
         <div className="mb-6">
-          <label className="text-sm mb-3 text-[#272727]" htmlFor="phoneNumber">
-            Phone Number
-          </label>
+          <p className="text-sm mb-3 text-[#272727]">Phone Number</p>
 
           <div className="flex">
-            <div className="  inline-flex justify-center items-center space-x-2 px-2  h-10 border mx-auto w-34">
+            <div className="  inline-flex justify-center items-center space-x-2 px-2  h-10 border-2 border-r-0 mx-auto w-34">
               {selectedCountry && (
                 <div>
-                  {/* <span>{selectedCountry.name}</span> */}
                   <Image
-                    src={selectedCountry.flag}
-                    alt={selectedCountry.name}
-                    height={18}
+                    src={
+                      selectedCountry
+                        ? selectedCountry.flag
+                        : "/icons/ng-flag.svg"
+                    }
+                    alt={selectedCountry ? selectedCountry.name : "NG"}
+                    height={22}
                     width={24}
                   />
                 </div>
               )}
-              <input
-                type="number"
-                {...register("countryCode")}
-                placeholder="+234"
-                className="text-sm text-[#272727] placeholder:text-sm placeholder:text-[#272727] w-12 h-full focus:outline-none"
-              />
-              {/* {errors.countryCode && (
-                <p className="text-[10px] text-[#7d0101]">
-                  {errors.countryCode.message}
-                </p>
-              )} */}
+              <div className="flex items-center text-sm   text-[#272727] placeholder:text-sm placeholder:text-[#272727] w-12 h-full focus:outline-none">
+                <span className=" text-sm ">+</span>
+                <input
+                  type="number"
+                  {...register("countryCode")}
+                  placeholder="0"
+                  className=" text-sm w-full outline-none appearance-none placeholder:text-sm placeholder:text-[#272727] text-[#272727]"
+                  onWheel={(e) => e.currentTarget.blur()} // Disable scroll change on number input
+                />
+              </div>
             </div>
             <input
               {...register("phoneNumber")}
@@ -324,31 +319,29 @@ export default function SignUp({
                 // Allow only digits (real-time blocking)
                 e.target.value = e.target.value.replace(/\D/g, "");
               }}
-              className="h-10  border-[#27272726] text-[#272727] focus:border-2 focus:border-[#7d0101]
-              placeholder:text-[#27272726] placeholder:text-sm text-sm  py-2 px-3 border rounded rounded-l-none w-full"
+              className="h-10  border-[#27272726] text-[#272727] border-2 focus:border-[#7d0101]
+              placeholder:text-[#27272726] placeholder:text-sm text-sm  py-2 px-3  rounded rounded-l-none w-full"
             />
           </div>
-          {errors.phoneNumber && (
-            <p className="text-[10px] font-medium text-[#7d0101]">
-              {errors.phoneNumber.message}
-            </p>
-          )}
-          {errors.countryCode && (
+
+          {errors.countryCode ? (
             <p className="text-[10px] font-medium text-[#7d0101]">
               {errors.countryCode.message}
             </p>
-          )}
+          ) : errors.phoneNumber ? (
+            <p className="text-[10px] font-medium text-[#7d0101]">
+              {errors.phoneNumber.message}
+            </p>
+          ) : null}
         </div>
         <div className="mb-6">
-          <label className="text-sm mb-3 text-[#272727]" htmlFor="email">
-            Email address
-          </label>
+          <p className="text-sm mb-3 text-[#272727]">Email address</p>
           <input
             {...register("email")}
             type="email"
             id="email"
             placeholder="Enter your email address"
-            className=" placeholder:text-sm placeholder:text-[#27272726] text-sm py-2 px-3 border-1 focus:border-2  h-10 rounded w-full focus:border-[#7d0101] text-[]"
+            className=" placeholder:text-sm placeholder:text-[#27272726] text-sm py-2 px-3 border-2 focus:border-2  h-10 rounded w-full focus:border-[#7d0101] text-[]"
           />
           {errors.email && (
             <p className="text-[10px] font-medium text-[#7d0101]">
@@ -357,15 +350,13 @@ export default function SignUp({
           )}
         </div>
         <div className="mb-6">
-          <label className="text-sm mb-3" htmlFor="password">
-            Password
-          </label>
+          <p className="text-sm mb-3">Password</p>
           <div className="relative">
             <input
               {...register("password")}
               type={showPassword ? "text" : "password"}
-              className=" h-10  border-[#27272726] text-[#272727] focus:border-2 focus:border-[#7d0101]
-              placeholder:text-[#27272726] placeholder:text-sm text-sm  py-2 pl-3 pr-24 border rounded w-full"
+              className=" h-10  border-[#27272726] text-[#272727] border-2 focus:border-[#7d0101]
+              placeholder:text-[#27272726] placeholder:text-sm text-sm  py-2 pl-3 pr-24 rounded w-full"
             />
             <p
               onClick={() => setShowPassword(!showPassword)}
@@ -381,17 +372,15 @@ export default function SignUp({
           )}
         </div>
         <div className="mb-6">
-          <label className="text-sm mb-3" htmlFor="confirmPassword">
-            Confirm Password
-          </label>
+          <p className="text-sm mb-3">Confirm Password</p>
           <div className="relative">
             <input
               type={showConfirmPassword ? "text" : "password"}
               id="confirmPassword"
               placeholder="Retype password to confirm"
               {...register("confirmPassword")}
-              className=" h-10  border-[#27272726] text-[#272727] focus:border-2  tracking-wider focus:border-[#7d0101]
-              placeholder:text-[#27272726] placeholder:text-sm text-sm  py-2 pl-3 pr-24 border rounded w-full"
+              className=" h-10  border-[#27272726] text-[#272727] border-2  tracking-wider focus:border-[#7d0101]
+              placeholder:text-[#27272726] placeholder:text-sm text-sm  py-2 pl-3 pr-24 rounded w-full"
             />
             <p
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -413,17 +402,26 @@ export default function SignUp({
             {...register("acceptTerms")}
             className="h-5 w-5 mr-2  cursor-pointer"
           />
-          <p className={`text-xs ${onest.className} leading-5  text-[#272727]`}>
-            By clicking this box, you confirm that you have read, understood and
-            consent to our 
-            <Link href="/terms-of-use" className="text-[#7d0101]">
-              terms of use 
-            </Link>
-            and 
-            <Link href="/privacy-notice" className="text-[#7d0101]">
-              privacy notice
-            </Link>
-          </p>
+          <div className="flex flex-col">
+            <label
+              className={`text-xs ${onest.className} leading-5  text-[#272727] mb-0.5 `}
+            >
+              By clicking this box, you confirm that you have read, understood
+              and consent to our 
+              <Link href="/terms-of-use" className="text-[#7d0101]">
+                terms of use 
+              </Link>
+              and 
+              <Link href="/privacy-notice" className="text-[#7d0101]">
+                privacy notice
+              </Link>
+            </label>
+            {errors.acceptTerms && (
+              <p className="text-[10px] font-medium bg-[#7d01011a] px-[8px] py-[2px] rounded w-[38%] text-[#7d0101]">
+                {errors.acceptTerms.message}
+              </p>
+            )}
+          </div>
         </div>
         <button
           type="submit"
