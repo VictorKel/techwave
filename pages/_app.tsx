@@ -1,7 +1,7 @@
 // pages/_app.tsx
 
 import Footer from "@/components/Footer";
-import Nav from "@/components/NavBar/Nav";
+// import Nav from "@/components/NavBar/Nav";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
@@ -12,7 +12,13 @@ import { useRouter } from "next/router";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  const noLayoutRoutes = ["/auth/login", "/auth/signIn"];
+  const noLayoutRoutes = [
+    "/auth/log-in",
+    "/auth/sign-up",
+    "/auth/forgot-password",
+    "/auth/reset-password",
+    "/auth/verify-mail",
+  ];
   const isAuthPage = noLayoutRoutes.includes(router.pathname);
 
   return (
@@ -26,4 +32,3 @@ export default function App({ Component, pageProps }: AppProps) {
     </main>
   );
 }
-
